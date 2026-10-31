@@ -31,6 +31,9 @@ const projects = defineCollection({
         stack: z.array(z.string()).min(1),
         url: z.url().optional(),
         selected: z.boolean().default(false),
+        // Position among Projects from the same year, lowest first. Projects without one
+        // follow, alphabetically.
+        order: z.number().int().optional(),
     }),
 })
 

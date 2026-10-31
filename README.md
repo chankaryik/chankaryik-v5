@@ -10,7 +10,7 @@ Personal website of Chan Kar Yik, served at [www.chankaryik.com](https://www.cha
 
 All content lives in `src/content/`:
 
-- `projects/`: one Markdown file per Project. `selected: true` shows it in full on the home page; `agency: null` means Freelance.
+- `projects/`: one Markdown file per Project. `selected: true` shows it in full on the home page; `agency: null` means Freelance; the optional `order` sets the position among Projects from the same year.
 - `roles.yaml`: work history. `company: null` means Freelance; `end: null` means current.
 - `skills.yaml`: skill groups. `order` sets the display position.
 - `about.md`: name, Headline, contact details, and the About paragraph

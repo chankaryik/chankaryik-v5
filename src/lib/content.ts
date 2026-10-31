@@ -22,7 +22,12 @@ export async function getProfile() {
 /** Every Project, newest first, with its rendered description. */
 export async function getProjects() {
     const entries = await getCollection('projects')
-    entries.sort((a, b) => b.data.year - a.data.year || a.data.name.localeCompare(b.data.name))
+    entries.sort(
+        (a, b) =>
+            b.data.year - a.data.year ||
+            (a.data.order ?? Infinity) - (b.data.order ?? Infinity) ||
+            a.data.name.localeCompare(b.data.name),
+    )
     return Promise.all(
         entries.map(async (entry) => ({
             ...entry.data,

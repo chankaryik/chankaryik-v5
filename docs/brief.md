@@ -70,7 +70,7 @@ Six **Selected Projects** shown in full: Client, Agency (shown as "via …") or 
 | MSIG Corporate Website                    | MSIG Malaysia                     | Bitlab Digital      | 2025 |
 | Brunei Darussalam Islamic Finance Website | Brunei Darussalam Central Bank    | Bitlab Digital      | 2025 |
 | Carput Zap                                | Carput Zap                        | Freelance           | 2023 |
-| JanganKenaScam                            | ABM, AIBIM                        | Bitlab Digital      | 2023 |
+| JanganKenaScam                            | ABM and AIBIM                     | Bitlab Digital      | 2023 |
 | Leaderonomics Website                     | Leaderonomics                     | Freelance           | 2022 |
 | Beats of Singapore                        | Spotify × Singapore Tourism Board | C27 × The Techy Hub | 2018 |
 
@@ -115,7 +115,7 @@ All content lives in data files that Astro checks on every build:
 - `src/content/about.md`
 - `src/content/blog/`: one Markdown file per Post, later
 
-Claude drafts the copy and Chan Kar Yik edits it. The drafts are three tones of About, the Selected Project text tightened to two lines each, the one-liners for the other Projects, and the contact line. Drafts use only facts from v4 or from Chan Kar Yik.
+The copy was drafted by Claude from facts in v4 and approved by Chan Kar Yik on 2026-10-31. It includes the About paragraph, the contact line, and the Selected Project text, which is tightened to two lines each. Projects from the same year are ordered by their optional `order` field, then alphabetically, so MSIG leads 2025.
 
 ## SEO
 
