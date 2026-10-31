@@ -19,3 +19,9 @@ npm-debug.log*
 # os and editors
 .DS_Store
 .idea/
+
+# design tool scratch: decision pages, mocks, screenshots, detector cache
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/questions/
+.impeccable/hook.cache.json

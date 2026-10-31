@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T00:00:00Z",
+  "title": "Design System: Chan Kar Yik",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Gallery Ink",
+        "canonical": "#1A1A1A",
+        "tonalRamp": ["#1A1A1A"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Wall Paper",
+        "canonical": "#F2F2F2",
+        "tonalRamp": ["#F2F2F2"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name in the masthead only; the 404 heading uses the same treatment at clamp(3rem, 11vw, 9.5rem)."
+      },
+      "headline": {
+        "displayName": "Wall Headline",
+        "purpose": "Section openers hung from a 6px rule."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Near-display paragraph under a wall heading, max 26ch."
+      },
+      "title": {
+        "displayName": "Row Title",
+        "purpose": "Project names; companies and AI-first points use smaller clamps at weight 750."
+      },
+      "subhead": {
+        "displayName": "Masthead Subhead",
+        "purpose": "Headline line (600) and city (300) under the name."
+      },
+      "body": { "displayName": "Body", "purpose": "Descriptions and point text, max 60ch." },
+      "label": { "displayName": "Label", "purpose": "Small headings on a 2px rule." },
+      "small": { "displayName": "Small", "purpose": "Nav, stack lines, footer row." }
+    },
+    "shadows": [],
+    "motion": [],
+    "rules": [
+      {
+        "name": "wall-rule",
+        "value": "border-top: 6px solid #1A1A1A",
+        "purpose": "Opens every major section, the footer and the 404 heading."
+      },
+      {
+        "name": "label-rule",
+        "value": "border-top: 2px solid #1A1A1A",
+        "purpose": "Opens labels; also under the nav."
+      },
+      {
+        "name": "row-rule",
+        "value": "border-top: 1px solid #1A1A1A",
+        "purpose": "Divides rows within a section."
+      }
+    ],
+    "focus": {
+      "value": "outline: 3px solid #1A1A1A; outline-offset: 3px",
+      "purpose": "All links, via :focus-visible."
+    },
+    "selection": { "value": "background: #1A1A1A; color: #F2F2F2" },
+    "scrollbar": { "value": "scrollbar-color: #1A1A1A #F2F2F2" },
+    "icons": {
+      "grid": "20px",
+      "stroke": "2px",
+      "linejoin": "round",
+      "fill": "none",
+      "color": "currentColor"
+    },
+    "breakpoints": [
+      { "name": "nav-row", "value": "34rem" },
+      { "name": "skills-2", "value": "40rem" },
+      { "name": "grid", "value": "56rem" },
+      { "name": "skills-4", "value": "64rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Link",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "Underlined inline link that inverts to solid ink on hover, instantly.",
+      "html": "<p class=\"ds-text\">Read the <a class=\"ds-link\" href=\"#\">case study</a> for details.</p>",
+      "css": ".ds-text { font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.125rem; line-height: 1.5; color: #1A1A1A; background: #F2F2F2; margin: 0; } .ds-link { color: inherit; text-decoration-line: underline; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; } .ds-link:hover { background: #1A1A1A; color: #F2F2F2; text-decoration: none; } .ds-link:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 3px; }"
+    },
+    {
+      "name": "Contact Link With Icon",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "Large link led by a 2px-stroke line icon; icon inverts with the text.",
+      "html": "<a class=\"ds-icon-link\" href=\"#\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2.5 4.5h15v11h-15zM2.5 5.5 10 11l7.5-5.5\"/></svg><span>hello@example.com</span></a>",
+      "css": ".ds-icon-link { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.5rem; font-weight: 650; letter-spacing: -0.015em; color: #1A1A1A; text-decoration-line: underline; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; } .ds-icon-link svg { flex: none; width: 0.8em; height: 0.8em; } .ds-icon-link:hover { background: #1A1A1A; color: #F2F2F2; text-decoration: none; } .ds-icon-link:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 3px; }"
+    },
+    {
+      "name": "Section Nav",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Six in-page links on a 2px rule; 3 by 2 on phones, one row from 34rem.",
+      "html": "<nav class=\"ds-nav\"><ul><li><a href=\"#\">About</a></li><li><a href=\"#\">Contact</a></li><li><a href=\"#\">AI-first</a></li><li><a href=\"#\">Projects</a></li><li><a href=\"#\">Experience</a></li><li><a href=\"#\">Skills</a></li></ul></nav>",
+      "css": ".ds-nav ul { display: grid; grid-template-columns: repeat(6, max-content); gap: 0.25rem 1.25rem; margin: 0; padding: 0 0 0.75rem; list-style: none; border-bottom: 2px solid #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 0.9375rem; font-weight: 600; } .ds-nav a { color: #1A1A1A; text-decoration: none; } .ds-nav a:hover { background: #1A1A1A; color: #F2F2F2; } .ds-nav a:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 3px; }"
+    },
+    {
+      "name": "Wall Heading",
+      "kind": "custom",
+      "refersTo": "wall-heading",
+      "description": "Section opener: 6px ink rule, then weight-850 headline.",
+      "html": "<h2 class=\"ds-wall\">Projects</h2>",
+      "css": ".ds-wall { margin: 0; padding-top: 0.5rem; border-top: 6px solid #1A1A1A; color: #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: clamp(2.75rem, 8.5vw, 7.5rem); font-weight: 850; line-height: 0.95; letter-spacing: -0.045em; }"
+    },
+    {
+      "name": "Label",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Small heading on a 2px rule for sub-sections and groups.",
+      "html": "<h3 class=\"ds-label\">More Projects</h3>",
+      "css": ".ds-label { margin: 0; padding-top: 0.75rem; border-top: 2px solid #1A1A1A; color: #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1rem; font-weight: 700; }"
+    },
+    {
+      "name": "Grid Row",
+      "kind": "custom",
+      "refersTo": "row",
+      "description": "Content row on the 2fr 5fr 5fr grid with a 1px rule on top.",
+      "html": "<div class=\"ds-row\"><p class=\"ds-row-year\">2025</p><div><h3 class=\"ds-row-title\">MSIG Corporate Website</h3><p class=\"ds-row-meta\">MSIG Malaysia</p></div><p class=\"ds-row-body\">Led the frontend of the new corporate site.</p></div>",
+      "css": ".ds-row { display: grid; grid-template-columns: 2fr 5fr 5fr; gap: 0.75rem 2rem; padding: 2rem 0; border-top: 1px solid #1A1A1A; color: #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.125rem; line-height: 1.5; } .ds-row p, .ds-row h3 { margin: 0; } .ds-row-year { font-weight: 700; font-variant-numeric: tabular-nums; } .ds-row-title { font-size: clamp(1.75rem, 3.4vw, 3rem); font-weight: 750; line-height: 1.02; letter-spacing: -0.03em; } .ds-row-meta { margin-top: 0.75rem; font-weight: 600; } .ds-row-body { max-width: 60ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Gallery Wall",
+    "overview": "The page is set like a modern museum identity: the name as monumental wall lettering, and every section hung from a heavy ink rule on one fixed column grid. There is one colour of ink on one colour of paper, one type family, and nothing moves. Hierarchy is carried entirely by weight, size and rule thickness, never by colour, tint, shadow or container.\n\nDensity is generous at the top (display type, long vertical gaps between sections) and tight inside sections (rows divided by hairline rules, tabular years in a narrow first column). The page reads top to bottom as a single column of walls; there are no cards, chips, panels or images.",
+    "keyCharacteristics": [
+      "Two colours: off-black ink on off-white paper, no greys, no hue.",
+      "One variable family, Archivo, used from weight 300 to 850.",
+      "A three-weight rule system (6px, 2px, 1px) is the only structure.",
+      "Rows share one 2fr 5fr 5fr grid from 56rem.",
+      "Links invert to solid ink on hover, instantly.",
+      "Zero motion, zero client JavaScript, no image files."
+    ],
+    "rules": [
+      {
+        "name": "The Two Inks Rule",
+        "body": "Only Gallery Ink and Wall Paper exist. No greys, no opacity tints, no hue, no third colour for states. Emphasis comes from weight or size, never from a lighter or coloured ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Inversion Rule",
+        "body": "The only colour change on the page is a swap: ink becomes the background and paper becomes the text (link hover, text selection).",
+        "section": "colors"
+      },
+      {
+        "name": "The Weight Carries It Rule",
+        "body": "Every level of hierarchy is size plus weight inside one family. Bold dates and years (700) mark time; light (300) marks secondary metadata. No second family, and no italics (only the upright axis is shipped).",
+        "section": "typography"
+      },
+      {
+        "name": "The Tight Tracking Rule",
+        "body": "The larger the type, the tighter the tracking: -0.045em at display and headline, -0.03em at titles, -0.01em to -0.02em at lead sizes, normal at body.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Time Rule",
+        "body": "Years and date ranges use tabular numerals so they align down a column.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Grid Rule",
+        "body": "Any new list of rows sits on the 2fr 5fr 5fr grid from 56rem, with its time or marker in the first column.",
+        "section": "layout"
+      },
+      {
+        "name": "The Rules Not Boxes Rule",
+        "body": "Group content by hanging it from a horizontal rule, never by enclosing it in a border, card or tint.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Three Rules Rule",
+        "body": "6px opens a section, 2px opens a label, 1px divides rows. Do not introduce a fourth thickness or use a rule for decoration.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do use only Gallery Ink (#1A1A1A) and Wall Paper (#F2F2F2), including for states, selection and the scrollbar.",
+      "Do carry hierarchy with Archivo weight (300 to 850) and size alone.",
+      "Do open sections with a 6px rule, labels with a 2px rule, and divide rows with a 1px rule.",
+      "Do put row lists on the 2fr 5fr 5fr grid from 56rem.",
+      "Do underline links and invert them to ink on hover, instantly; focus with a 3px ink outline at 3px offset.",
+      "Do draw icons inline on the 20px grid with a 2px stroke in currentColor, next to text that carries the meaning."
+    ],
+    "donts": [
+      "Don't use #000, #fff, greys, opacity tints or any hue.",
+      "Don't add transitions, animations or scroll effects; every state change is instant.",
+      "Don't use shadows, rounded corners, cards, chips or tinted panels.",
+      "Don't add a second font family or italics; one self-hosted upright Archivo is the whole type system.",
+      "Don't use image files or icon fonts; icons and logos are inline SVG.",
+      "Don't add client-side JavaScript for any visual behaviour."
+    ]
+  }
+}
