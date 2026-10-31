@@ -1,0 +1,92 @@
+---
+// Unstyled structure with the real content. The impeccable design pass owns the markup and styles.
+import Base from '../layouts/Base.astro'
+import { formatMonth, getExperience, getProfile, getProjects, getSkills } from '../lib/content'
+
+const profile = await getProfile()
+const projects = await getProjects()
+const selectedProjects = projects.filter((project) => project.selected)
+const otherProjects = projects.filter((project) => !project.selected)
+const experience = await getExperience()
+const skills = await getSkills()
+---
+
+<Base title={`${profile.name} — Frontend Developer`} description={profile.description}>
+    <header>
+        <h1>{profile.name}</h1>
+        <p>{profile.headline}</p>
+    </header>
+
+    <main>
+        <section aria-labelledby="about">
+            <h2 id="about">About</h2>
+            <profile.About />
+        </section>
+
+        <section aria-labelledby="contact">
+            <h2 id="contact">Contact</h2>
+            <p>{profile.contactLine}</p>
+            <ul>
+                <li>
+                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                </li>
+                <li>
+                    <a href={profile.linkedin}>LinkedIn</a>
+                </li>
+                <li>
+                    <a href={profile.github}>GitHub</a>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="projects">
+            <h2 id="projects">Projects</h2>
+            {selectedProjects.map((project) => (
+                <article>
+                    <h3>{project.name}</h3>
+                    <p>
+                        {project.client} · {project.agency ? `via ${project.agency}` : 'Freelance'}{' '}
+                        · {project.year}
+                    </p>
+                    <p>{project.stack.join(', ')}</p>
+                    <project.Description />
+                    {project.url && <a href={project.url}>Visit website</a>}
+                </article>
+            ))}
+            <ul>
+                {otherProjects.map((project) => (
+                    <li>
+                        {project.url ? <a href={project.url}>{project.name}</a> : project.name} ·{' '}
+                        {project.client} · {project.year}
+                    </li>
+                ))}
+            </ul>
+        </section>
+
+        <section aria-labelledby="experience">
+            <h2 id="experience">Experience</h2>
+            <ul>
+                {experience.map((group) => (
+                    <li>
+                        <strong>{group.company ?? 'Freelance'}</strong> · {group.titles.join(' → ')}{' '}
+                        · {formatMonth(group.start)} – {group.end ? formatMonth(group.end) : 'now'}
+                    </li>
+                ))}
+            </ul>
+        </section>
+
+        <section aria-labelledby="skills">
+            <h2 id="skills">Skills</h2>
+            {skills.map((group) => (
+                <>
+                    <h3>{group.name}</h3>
+                    <p>{group.items.join(', ')}</p>
+                </>
+            ))}
+        </section>
+    </main>
+
+    <footer>
+        <p>© {profile.name}</p>
+    </footer>
+</Base>

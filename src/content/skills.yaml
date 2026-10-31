@@ -1,0 +1,21 @@
+# Skill groups. order sets the display position, lowest first.
+
+- id: frontend
+  name: Frontend
+  order: 1
+  items: [Vue, Nuxt, React, Next.js, TypeScript, Tailwind CSS, Sass, Pinia, Figma]
+
+- id: backend-cms
+  name: Backend & CMS
+  order: 2
+  items: [Laravel, Inertia.js, PHP, C#/.NET, Umbraco, WordPress, Strapi, Stripe, CHIP]
+
+- id: cloud-ci-cd
+  name: Cloud & CI/CD
+  order: 3
+  items: [Azure, Vercel, DigitalOcean, GitHub Actions]
+
+- id: ai-tools
+  name: AI tools
+  order: 4
+  items: [Claude Code, Codex]
