@@ -6,7 +6,7 @@ points:
     text: Claude Code and Codex are part of almost everything I build. This site was planned, designed and built with Claude Code.
   - title: In what I ship
     icon: chat
-    text: I added an Azure OpenAI chatbot for customer support to MSIG Malaysia's corporate site.
+    text: At respond.io, I work on the web app where businesses build AI Agents that qualify leads, route chats and book appointments across WhatsApp, Instagram and more, then hand off to a person.
   - title: Automation first
     icon: loop
     text: If a task repeats, I automate it, so my time goes to the work that needs a person.

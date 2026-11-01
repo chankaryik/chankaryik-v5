@@ -8,5 +8,5 @@ url: https://www.bdif.com.bn/
 selected: true
 ---
 
-- Brunei's central bank uses this site to promote Islamic finance through publications, events and learning resources. I led its development.
-- Built a newsletter system for email campaigns, and Baiduri Bank payments for paid events.
+- Brunei's central bank promotes Islamic finance here through publications, events and learning resources, with a newsletter system and Baiduri Bank payments for paid events.
+- I oversaw the developers who built its frontend and backend.

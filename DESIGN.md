@@ -67,7 +67,7 @@ typography:
     letterSpacing: '-0.015em'
   list-item:
     fontFamily: "Archivo, 'Archivo Fallback', Arial, sans-serif"
-    fontSize: 'clamp(1.125rem, 1vw + 0.8rem, 1.5rem)'
+    fontSize: 'clamp(1.375rem, 0.5vw + 1.2rem, 1.5rem)'
     fontWeight: 500
     lineHeight: 1.35
     letterSpacing: '-0.01em'
@@ -179,11 +179,11 @@ Archivo is self-hosted through Astro's fonts API: one variable woff2, axis 100 t
 
 - **Display** (850, clamp 3.5rem to 13rem at 14vw, line-height 0.88, -0.045em): the name in the masthead only. The 404 heading uses the same treatment at a smaller clamp (3rem to 9.5rem).
 - **Headline** (850, clamp 2.75rem to 7.5rem, line-height 0.95, -0.045em): wall headings that open each major section.
-- **Statement** (700, clamp 1.625rem to 3.5rem, line-height 1.08, -0.03em, max 26ch): a near-display paragraph directly under a wall heading.
+- **Statement** (700, clamp 1.625rem to 3.5rem, line-height 1.08, -0.03em, max 26ch): a near-display paragraph directly under a wall heading. The Rust aside sets its three beats at this size, with the confession at 300 and the punchline at 850 and 1.5 times larger.
 - **Subhead** (600 for the Headline line, 300 for the city; clamp 1.375rem to 2.75rem, line-height 1.15, -0.02em): the masthead lines under the name.
-- **Title** (750, clamp 1.75rem to 3rem for project names, 1.5rem to 2.25rem for companies, 1.375rem to 2rem for AI-first points; line-height about 1.05, -0.025em to -0.03em): row titles.
+- **Title** (750, clamp 1.75rem to 3rem for project names, 1.5rem to 2.25rem for companies, 1.375rem to 2rem for AI-first points and the Rust sign-off; line-height about 1.05, -0.025em to -0.03em): row titles.
 - **Lead** (400, clamp 1.25rem to 1.875rem, line-height 1.35, max 34ch): the About paragraph.
-- **Link list** (650, clamp 1.25rem to 1.75rem, -0.015em): Contact links and the 404 return link.
+- **Link list** (650, clamp 1.25rem to 1.75rem, -0.015em): Contact links, the footer's LinkedIn and GitHub links, and the 404 return link.
 - **Body** (400, clamp 1.0625rem to 1.1875rem, line-height 1.5, max 60ch): descriptions and point text.
 - **Label** (700, 1rem): small section labels sitting on a 2px rule.
 - **Small** (600, 0.9375rem): nav, stack lines, footer row.
@@ -202,7 +202,7 @@ Archivo is self-hosted through Astro's fonts API: one variable woff2, axis 100 t
 
 Single column with fluid side margins of clamp(1rem, 4.5vw, 4rem) and a column gap of clamp(1rem, 2.5vw, 2rem). No max-width container: the walls run edge to margin at every width.
 
-From 56rem every content row (AI-first points, Projects, More Projects, Experience) uses the same three-column grid, 2fr 5fr 5fr: time or icon in the first column, title in the second, body in the third. Below 56rem rows stack, and More Projects rows put the name first with the year pushed right. The intro (About, Contact) splits 7fr 5fr from 56rem. Skills run one column, two from 40rem, four from 64rem. The nav runs as a 3-by-2 grid on phones and a single row from 34rem.
+From 56rem every content row (AI-first points, Projects, More Projects, Experience, the Rust answer) uses the same three-column grid, 2fr 5fr 5fr: time or icon in the first column, title in the second, body in the third (the Rust answer has no marker and spans the second and third). Below 56rem rows stack, and More Projects rows put the name first with the year pushed right. The intro (About, Contact) splits 7fr 5fr from 56rem. Skills run one column, two from 40rem, four from 64rem. The nav is one sticky row at every width; where it does not fit, it scrolls sideways.
 
 Vertical rhythm is set by clamps: sections sit clamp(5rem, 12vw, 10rem) apart, the footer clamp(6rem, 14vw, 12rem) below the last section; rows pad clamp(1.25rem, 2.5vw, 2rem) to clamp(1.5rem, 3vw, 2.5rem) top and bottom; More Projects rows pad 0.7rem.
 
@@ -241,14 +241,16 @@ Plainly underlined text that turns into a solid ink block on hover.
 - **Default:** inherits ink; underline 0.09em thick, offset 0.2em (the sign-off uses 0.06em and 0.12em at its size).
 - **Hover:** ink background, paper text, underline removed. Instant, no transition.
 - **Focus:** 3px solid ink outline at 3px offset (`:focus-visible`).
-- **With icon:** inline-flex, icon at 0.75em to 0.8em, gap 0.3em to 0.45em; the icon inverts with the text.
+- **With icon:** inline-flex, icon at 0.75em to 0.8em (Contact and footer links: 1em on phones), gap 0.3em to 0.45em; the icon inverts with the text.
 - **Exception:** nav links and the 404 home link drop the underline because their position on the 2px nav rule marks them as links.
 
 ### Navigation
 
-- Six in-page section links, weight 600 at 0.9375rem, on a 2px rule underneath with 0.75rem padding.
-- Grid of three columns on phones (two balanced rows), six from 34rem; gaps 0.25rem by 1.25rem.
-- Hover follows the link inversion.
+- Six in-page section links in one row, weight 600 at 0.9375rem, gap 1.25rem, 0.75rem above and below, on a 2px rule that keeps to the margins.
+- Sticky at the top of the screen at every width (about 49px tall). Its paper background runs edge to edge so the page passes out of sight beneath it. Section links land 5rem below the top (`scroll-padding-top`) so headings clear the bar.
+- Where the six links do not fit (most phones, below about 416px), the row scrolls sideways out to the screen edges with no scrollbar; the word cut off at the edge shows there is more.
+- Each link's tap area is the full bar height plus half of each gap; the hover fill stays on the word.
+- Hover follows the link inversion. Being sticky is a fixed position, not motion: nothing animates.
 
 ### Wall heading (signature)
 
@@ -260,15 +262,23 @@ A small heading (700, 1rem) with a 2px rule above and 0.75rem padding. Used for 
 
 ### Row
 
-A grid row with a 1px rule on top: marker or year (tabular, 700, or light dates with "now" in 700), title (750), body (400, max 60ch). Inline metadata lines (agency, stack) lead with a 1em icon aligned to the first text line.
+A grid row with a 1px rule on top: marker or year (tabular, 700, or light dates with "now" in 700), title (750; in Experience the company name is an underlined link to its website, Freelance excepted), body (400, max 60ch). Inline metadata lines (agency, stack) lead with a 1em icon aligned to the first text line.
+
+### Rust aside
+
+The last section, after Skills, and left out of the nav: a coda, not somewhere to jump to. A joke in three beats set as Statement type, where weight does the timing (setup 700, confession 300, punchline 850 and larger), 0.5em apart. Then the serious answer as a row: body text, closed by a sign-off line at Title size.
+
+### Footer
+
+A 6px wall rule, the email address at Sign-off size, then LinkedIn and GitHub with their logos as a Link list, and a Small row with the copyright and "Back to top".
 
 ### Icons
 
 Inline SVG, 20px viewBox, 2px stroke (1.5 for the large location pin), `aria-hidden`, sized in em to the text beside them; the adjacent text always carries the meaning.
 
-### Skill logos
+### Brand logos
 
-Simple Icons brand marks drawn in currentColor at 0.85em, a user-approved exception to the brief's no-brand-logos rule. Skills without a published mark keep an empty slot of the same size so names align.
+Filled brand marks (`src/components/BrandLogo.astro`) beside skills and the LinkedIn and GitHub links in Contact and the footer, a user-approved exception to the brief's no-brand-logos rule. They come from Simple Icons, or are copied in by hand when Simple Icons has none (Azure, Codex, LinkedIn), always drawn in currentColor so they invert with a hovered link. Beside skills they are 1em on phones and 0.85em from 40rem; in Contact and the footer they match the line icons: 1em on phones, 0.8em from 40rem. Skills without a published mark keep an empty slot of the same size so names align.
 
 ## Do's and Don'ts
 

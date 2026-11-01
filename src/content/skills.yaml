@@ -8,7 +8,7 @@
 - id: backend-cms
   name: Backend & CMS
   order: 2
-  items: [Laravel, Inertia.js, PHP, C#/.NET, Umbraco, WordPress, Strapi, Stripe, CHIP]
+  items: [Laravel, Inertia.js, PHP, C#/.NET, Umbraco, WordPress, Strapi, Stripe]
 
 - id: cloud-ci-cd
   name: Cloud & CI/CD

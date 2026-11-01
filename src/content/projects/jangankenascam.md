@@ -8,4 +8,4 @@ url: https://www.jangankenascam.com/
 selected: true
 ---
 
-- Malaysia's bank associations teach the public to spot scams here, with quizzes, simulations of real scams and a resource hub. I led its development.
+- Malaysia's bank associations teach the public to spot scams here, with quizzes, simulations of real scams and a resource hub.

@@ -1,21 +1,25 @@
 # Work history, one entry per Role, newest first.
-# company: null means Freelance. end: null means the Role is current.
+# company: null means Freelance. end: null means the Role is current. url is the company's
+# website, the same on every Role at that company.
 
 - id: respond-io-frontend-developer
   title: Frontend Developer
   company: respond.io
+  url: https://respond.io/
   start: '2026-06'
   end: null
 
 - id: bitlab-digital-frontend-lead
   title: Frontend Lead
   company: Bitlab Digital
+  url: https://www.thebitlab.co/
   start: '2024-02'
   end: '2026-01'
 
 - id: bitlab-digital-senior-frontend-developer
   title: Senior Frontend Developer
   company: Bitlab Digital
+  url: https://www.thebitlab.co/
   start: '2022-11'
   end: '2024-01'
 
@@ -23,28 +27,32 @@
   title: Fullstack Developer
   company: null
   start: '2021-03'
-  end: '2024-01'
+  end: null
 
 - id: the-techy-hub-senior-frontend-developer
   title: Senior Frontend Developer
   company: The Techy Hub
+  url: https://thetechyhub.com/
   start: '2020-10'
   end: '2021-03'
 
 - id: the-techy-hub-frontend-developer
   title: Frontend Developer
   company: The Techy Hub
+  url: https://thetechyhub.com/
   start: '2019-10'
   end: '2020-09'
 
 - id: the-techy-hub-junior-frontend-developer
   title: Junior Frontend Developer
   company: The Techy Hub
+  url: https://thetechyhub.com/
   start: '2018-07'
   end: '2019-09'
 
 - id: the-techy-hub-frontend-intern
   title: Frontend Intern
   company: The Techy Hub
+  url: https://thetechyhub.com/
   start: '2018-03'
   end: '2018-06'

@@ -22,8 +22,9 @@ Simple, with an eye-catching style, on phones and desktop. Impeccable decides th
 
 - **Light theme only.** Off-black text on an off-white background, never pure `#000` or `#fff`. The black must be comfortable to read for a long time.
 - **Black, white and a few greys.** No colour anywhere, including links, focus outlines and text selection.
-- **No emoji.** Brand logos appear only beside skills (see [Skills](#7-skills)). Every icon, logo or not, is monochrome inline SVG.
+- **No emoji.** Brand logos appear only beside skills (see [Skills](#7-skills)) and the LinkedIn and GitHub links in Contact and the footer. Every icon, logo or not, is monochrome inline SVG.
 - **Nothing moves.** No transitions, animations, smooth scrolling, scroll effects, loaders or skeletons. Hover and focus states are allowed but change instantly.
+- **The section nav stays at the top of the screen,** as one row at every width. On phones it scrolls sideways when the links don't fit. Staying put is a fixed position, not motion, so it is allowed.
 - **One Google Fonts family for all text,** self-hosted: one variable file, Latin characters only, upright only. It is preloaded and uses `font-display: optional`, so on a slow first visit the page shows a system font and never swaps font while someone is reading. An italic file is added only when the blog arrives.
 
 ## Hard rules
@@ -66,7 +67,7 @@ Two to four sentences in Chan Kar Yik's own voice, including that they work AI-f
 How Chan Kar Yik works with AI: a short opening statement, then four short points, each with a line icon:
 
 - **In my daily work:** Claude Code and Codex, and the fact that this site was built with Claude Code.
-- **In what I ship:** the Azure OpenAI chatbot on MSIG Malaysia's site.
+- **In what I ship:** the respond.io web app where businesses build AI Agents that qualify leads, route chats and book appointments, then hand off to a person.
 - **Automation first:** anything that repeats gets automated.
 - **Ready for AI work:** AI features, LLM integrations and AI-assisted workflows are the work Chan Kar Yik wants next.
 
@@ -74,42 +75,49 @@ This section says what work Chan Kar Yik wants; the contact line stays neutral.
 
 ### 5. Projects
 
-Six **Selected Projects** shown in full: Client, Agency (marked with an arrow icon, read aloud as "via …") or "Freelance", stack, year, two short lines leading with the outcome, and a link when one exists.
+Seven **Selected Projects** shown in full: Client, Agency (marked with an arrow icon, read aloud as "via …") or "Freelance", stack, year, two short lines leading with the outcome, and a link when one exists.
 
 | Project                                   | Client                            | Agency              | Year |
 | ----------------------------------------- | --------------------------------- | ------------------- | ---- |
 | MSIG Corporate Website                    | MSIG Malaysia                     | Bitlab Digital      | 2025 |
+| Baiduri Tools                             | Baiduri Bank                      | Bitlab Digital      | 2025 |
 | Brunei Darussalam Islamic Finance Website | Brunei Darussalam Central Bank    | Bitlab Digital      | 2025 |
 | Carput Zap                                | Carput Zap                        | Freelance           | 2023 |
 | JanganKenaScam                            | ABM and AIBIM                     | Bitlab Digital      | 2023 |
 | Leaderonomics Website                     | Leaderonomics                     | Freelance           | 2022 |
 | Beats of Singapore                        | Spotify × Singapore Tourism Board | C27 × The Techy Hub | 2018 |
 
-The other nine Projects each get one line: name, Client, year and link. Source text is in v4's `src/components/Projects.vue`.
+For MSIG, Baiduri Tools and Brunei, the first line says what the site does and the second says Chan Kar Yik's part, in plain words: led frontend and backend development on MSIG, managed a team of three frontend developers and one backend developer on Baiduri Tools, and oversaw the developers who built the Brunei site (Chan Kar Yik did not build it themselves). JanganKenaScam has one line, about the site.
+
+The other eight Projects each get one line: name, Client, year and link. Source text is in v4's `src/components/Projects.vue`.
 
 ### 6. Experience
 
-Roles grouped by company, so the progression reads on one line. Seniority levels appear here as history.
+Roles grouped by company, so the progression reads on one line. Seniority levels appear here as history. Each company name links to its website; Freelance has none.
 
 | Company        | Roles                                                            | Dates               |
 | -------------- | ---------------------------------------------------------------- | ------------------- |
 | respond.io     | Frontend Developer                                               | Jun 2026 – now      |
 | Bitlab Digital | Senior Frontend Developer → Frontend Lead                        | Nov 2022 – Jan 2026 |
-| Freelance      | Fullstack Developer                                              | Mar 2021 – Jan 2024 |
+| Freelance      | Fullstack Developer                                              | Mar 2021 – now      |
 | The Techy Hub  | Intern → Junior → Frontend Developer → Senior Frontend Developer | Mar 2018 – Mar 2021 |
 
 ### 7. Skills
 
 - **Frontend:** Vue, Nuxt, React, Next.js, TypeScript, Tailwind CSS, Sass, Pinia, Figma
-- **Backend & CMS:** Laravel, Inertia.js, PHP, C#/.NET, Umbraco, WordPress, Strapi, Stripe, CHIP
+- **Backend & CMS:** Laravel, Inertia.js, PHP, C#/.NET, Umbraco, WordPress, Strapi, Stripe
 - **Cloud & CI/CD:** Azure, Vercel, DigitalOcean, GitHub Actions
 - **AI tools:** Claude Code, Codex
 
-Each skill shows its brand logo beside its name, in black and white, taken from the free Simple Icons set at build time. Skills with no logo in that set (CHIP, Azure and Codex) show the name alone.
+Each skill shows its brand logo beside its name, in black and white. Logos come from the free Simple Icons set at build time. Two that Simple Icons does not carry are copied in by hand: Azure from Microsoft's official Azure icon set, and Codex as the OpenAI mark, supplied by Chan Kar Yik.
 
-### 8. Footer
+### 8. Rewrite it in Rust?
 
-Decided in impeccable.
+A light aside, not in the nav. It jokes about everything being rewritten in Rust, admits Chan Kar Yik doesn't write Rust, and teases that with an AI agent they could anyway. Then the serious answer: seven years of writing every line by hand, AI agents since 2025, and that experience is what lets the agents help Chan Kar Yik make better decisions and ship better work. It teases; it is not sarcasm. It says "since 2025", not "for a year", so it never goes stale.
+
+### 9. Footer
+
+Decided in impeccable: the email address set large, then the LinkedIn and GitHub links again, then the copyright and a back-to-top link.
 
 ## Resume
 
@@ -127,11 +135,14 @@ All content lives in data files that Astro checks on every build:
 - `src/content/skills.yaml`
 - `src/content/about.md`
 - `src/content/ai.md`: the AI-first section
+- `src/content/rust.md`: the Rust aside
 - `src/content/blog/`: one Markdown file per Post, later
 
 The copy was drafted by Claude from facts in v4 and approved by Chan Kar Yik on 2026-10-31. It includes the About paragraph, the contact line, and the Selected Project text, which is tightened to two lines each. Projects from the same year are ordered by their optional `order` field, then alphabetically, so MSIG leads 2025.
 
 During the design pass on 2026-11-01, Chan Kar Yik approved three changes: the About paragraph now says they work AI-first and cites the Leaderonomics PageSpeed result in place of the article migration; the AI-first section was added; and skills gained their logos.
+
+Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they led frontend and backend; on Brunei they directed the team and did not build it), made Baiduri Tools a Selected Project, asked for the Rust aside, and asked for LinkedIn and GitHub in the footer. The About paragraph now says "led development" for MSIG and Brunei's central bank, in place of "led the frontend".
 
 ## SEO
 
@@ -140,7 +151,7 @@ During the design pass on 2026-11-01, Chan Kar Yik approved three changes: the A
 - `sitemap.xml` and `robots.txt`.
 - JSON-LD `Person` structured data: name, job title, LinkedIn and GitHub.
 - One 1200×630 share image showing the name and Headline in the site's font and colours, made after the impeccable pass.
-- `favicon.ico` and `apple-touch-icon.png`: initials in the site's font.
+- `favicon.ico` (16, 32 and 48px) and `apple-touch-icon.png` (180px): a circle split straight across the middle, ink above and paper below, in the site's two colours. It is not a yin-yang. An ink ring keeps the paper half visible on a light tab bar; on a very dark one, the ink half fades into the bar. The touch icon puts the circle on paper with a 6px ring, the weight of the site's wall rule, because iOS shows transparency as black. It replaced v4's photo on 2026-11-01.
 - v4's Facebook app ID tag is dropped.
 
 ## Tech

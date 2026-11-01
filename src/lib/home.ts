@@ -1,4 +1,4 @@
-import { getAiFirst, getExperience, getProfile, getProjects, getSkills } from './content'
+import { getAiFirst, getExperience, getProfile, getProjects, getRust, getSkills } from './content'
 
 /** Everything the home page shows, in section order. */
 export async function getHome() {
@@ -10,6 +10,7 @@ export async function getHome() {
         otherProjects: projects.filter((project) => !project.selected),
         experience: await getExperience(),
         skills: await getSkills(),
+        rust: await getRust(),
     }
 }
 

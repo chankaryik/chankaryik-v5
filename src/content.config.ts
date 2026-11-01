@@ -38,6 +38,17 @@ const ai = defineCollection({
     }),
 })
 
+// The aside after Skills: a joke in three beats, read in order. The body is the serious answer.
+const rust = defineCollection({
+    loader: glob({ pattern: 'rust.md', base: './src/content' }),
+    schema: z.object({
+        heading: z.string(),
+        setup: z.string(),
+        confession: z.string(),
+        punchline: z.string(),
+    }),
+})
+
 const projects = defineCollection({
     loader: glob({ pattern: '*.md', base: './src/content/projects' }),
     schema: z.object({
@@ -61,6 +72,8 @@ const roles = defineCollection({
         title: z.string(),
         // null means Freelance
         company: z.string().nullable(),
+        // The company's website, linked from its name
+        url: z.url().optional(),
         start: month,
         // null means the Role is current
         end: month.nullable(),
@@ -77,4 +90,4 @@ const skills = defineCollection({
     }),
 })
 
-export const collections = { about, ai, projects, roles, skills }
+export const collections = { about, ai, projects, roles, rust, skills }

@@ -27,6 +27,14 @@ export async function getAiFirst() {
     return { ...entry.data, Statement: Content }
 }
 
+/** The Rust aside: heading, the joke's three beats and the serious answer. */
+export async function getRust() {
+    const entry = await getEntry('rust', 'rust')
+    if (!entry) throw new Error('src/content/rust.md is missing')
+    const { Content } = await render(entry)
+    return { ...entry.data, Answer: Content }
+}
+
 /** Every Project, newest first, with its rendered description. */
 export async function getProjects() {
     const entries = await getCollection('projects')
@@ -62,6 +70,7 @@ export async function getExperience() {
 
     return groups.map(({ company, roles }) => ({
         company,
+        url: roles.find((role) => role.url)?.url,
         titles: roles.map((role) => role.title),
         start: roles[0]!.start,
         end: roles.at(-1)!.end,

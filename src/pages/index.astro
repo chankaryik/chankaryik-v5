@@ -1,11 +1,12 @@
 ---
 import Icon from '../components/Icon.astro'
-import SkillLogo from '../components/SkillLogo.astro'
+import BrandLogo from '../components/BrandLogo.astro'
 import Base from '../layouts/Base.astro'
 import { formatMonth } from '../lib/content'
 import { getHome, resumeHref } from '../lib/home'
 
-const { profile, aiFirst, selectedProjects, otherProjects, experience, skills } = await getHome()
+const { profile, aiFirst, selectedProjects, otherProjects, experience, skills, rust } =
+    await getHome()
 const sections = [
     { label: 'About', id: 'about' },
     { label: 'Contact', id: 'contact' },
@@ -17,16 +18,17 @@ const sections = [
 ---
 
 <Base title={`${profile.name} — Frontend Developer`} description={profile.description}>
+    <nav class="sections" aria-label="Sections">
+        <ul>
+            {sections.map(({ label, id }) => (
+                <li>
+                    <a href={`#${id}`}>{label}</a>
+                </li>
+            ))}
+        </ul>
+    </nav>
+
     <header class="masthead" id="top">
-        <nav aria-label="Sections">
-            <ul>
-                {sections.map(({ label, id }) => (
-                    <li>
-                        <a href={`#${id}`}>{label}</a>
-                    </li>
-                ))}
-            </ul>
-        </nav>
         <h1>{profile.name}</h1>
         <p class="headline">{profile.headline}</p>
         <p class="location">
@@ -58,13 +60,13 @@ const sections = [
                     </li>
                     <li>
                         <a href={profile.linkedin}>
-                            <Icon name="person" />
+                            <BrandLogo name="LinkedIn" />
                             <span>LinkedIn</span>
                         </a>
                     </li>
                     <li>
                         <a href={profile.github}>
-                            <Icon name="code" />
+                            <BrandLogo name="GitHub" />
                             <span>GitHub</span>
                         </a>
                     </li>
@@ -171,7 +173,13 @@ const sections = [
                             {formatMonth(group.start)} –{' '}
                             {group.end ? formatMonth(group.end) : <strong>now</strong>}
                         </p>
-                        <h3>{group.company ?? 'Freelance'}</h3>
+                        <h3>
+                            {group.url ? (
+                                <a href={group.url}>{group.company}</a>
+                            ) : (
+                                (group.company ?? 'Freelance')
+                            )}
+                        </h3>
                         <ol class="progression">
                             {group.titles.map((title, index) => (
                                 <li>
@@ -196,7 +204,7 @@ const sections = [
                         <ul>
                             {group.items.map((item) => (
                                 <li>
-                                    <SkillLogo name={item} />
+                                    <BrandLogo name={item} />
                                     {item}
                                 </li>
                             ))}
@@ -205,12 +213,40 @@ const sections = [
                 ))}
             </div>
         </section>
+
+        <section class="block" aria-labelledby="rust">
+            <h2 id="rust" class="wall">
+                {rust.heading}
+            </h2>
+            <div class="beats">
+                <p class="setup">{rust.setup}</p>
+                <p class="confession">{rust.confession}</p>
+                <p class="punchline">{rust.punchline}</p>
+            </div>
+            <div class="rust-answer">
+                <rust.Answer />
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
         <p class="sign-off">
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
         </p>
+        <ul class="footer-links">
+            <li>
+                <a href={profile.linkedin}>
+                    <BrandLogo name="LinkedIn" />
+                    <span>LinkedIn</span>
+                </a>
+            </li>
+            <li>
+                <a href={profile.github}>
+                    <BrandLogo name="GitHub" />
+                    <span>GitHub</span>
+                </a>
+            </li>
+        </ul>
         <div class="footer-row">
             <p>
                 © {new Date().getFullYear()} {profile.name}
@@ -223,32 +259,61 @@ const sections = [
 </Base>
 
 <style>
-    /* Masthead */
-
-    .masthead {
-        padding-top: clamp(1rem, 2.5vw, 2rem);
+    /*
+     * Section nav: one row that stays at the top of the screen. Its paper runs edge to edge so
+     * the page scrolls out of sight beneath it; its 2px rule keeps to the margins like every
+     * other rule. Where the six links do not fit (most phones), the row scrolls sideways to the
+     * screen edges, and the word cut off there shows there is more.
+     */
+    .sections {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        margin-inline: calc(-1 * var(--margin));
+        padding-inline: var(--margin);
+        background: var(--paper);
     }
 
-    /* Two balanced rows of three on phones, one row once it fits */
-    nav ul {
-        display: grid;
-        grid-template-columns: repeat(3, max-content);
-        gap: 0.25rem 1.25rem;
-        padding-bottom: 0.75rem;
+    .sections::after {
+        content: '';
+        display: block;
         border-bottom: 2px solid var(--ink);
+    }
+
+    .sections ul {
+        display: flex;
+        gap: 1.25rem;
+        margin-inline: calc(-1 * var(--margin));
+        padding-inline: var(--margin);
+        overflow-x: auto;
+        scrollbar-width: none;
         font-size: 0.9375rem;
         font-weight: 600;
+        white-space: nowrap;
     }
 
-    @media (min-width: 34rem) {
-        nav ul {
-            grid-template-columns: repeat(6, max-content);
-        }
+    .sections li {
+        position: relative;
+        padding-block: 0.75rem;
     }
 
-    nav a {
+    .sections a {
         text-decoration: none;
     }
+
+    /* The whole bar height and half of each gap are the tap area; the hover fill stays on the word */
+    .sections a::after {
+        content: '';
+        position: absolute;
+        inset: 0 -0.625rem;
+    }
+
+    /* Section links land below the bar, not under it */
+    :global(html) {
+        scroll-padding-top: 5rem;
+    }
+
+    /* Masthead */
 
     h1 {
         margin-top: clamp(3rem, 12vw, 9rem);
@@ -321,21 +386,40 @@ const sections = [
         justify-items: start;
         gap: 0.35rem;
         margin-top: 1.25rem;
+    }
+
+    /* Contact links, and the LinkedIn and GitHub links again in the footer */
+    .contact-links,
+    .footer-links {
         font-size: clamp(1.25rem, 1.4vw + 0.7rem, 1.75rem);
         font-weight: 650;
         letter-spacing: -0.015em;
     }
 
-    .contact-links a {
+    .contact-links a,
+    .footer-links a {
         display: inline-flex;
         align-items: center;
         gap: 0.45em;
         overflow-wrap: anywhere;
     }
 
-    .contact-links :global(.icon) {
-        width: 0.8em;
-        height: 0.8em;
+    /* Full text size on phones, where the text is at its smallest */
+    .contact-links :global(.icon),
+    .contact-links :global(.logo),
+    .footer-links :global(.logo) {
+        flex: none;
+        width: 1em;
+        height: 1em;
+    }
+
+    @media (min-width: 40rem) {
+        .contact-links :global(.icon),
+        .contact-links :global(.logo),
+        .footer-links :global(.logo) {
+            width: 0.8em;
+            height: 0.8em;
+        }
     }
 
     @media (min-width: 56rem) {
@@ -614,7 +698,7 @@ const sections = [
         display: grid;
         gap: 0.3rem;
         margin-top: 0.75rem;
-        font-size: clamp(1.125rem, 1vw + 0.8rem, 1.5rem);
+        font-size: clamp(1.375rem, 0.5vw + 1.2rem, 1.5rem);
         font-weight: 500;
         line-height: 1.35;
         letter-spacing: -0.01em;
@@ -626,15 +710,21 @@ const sections = [
         gap: 0.5em;
     }
 
+    /* Full text size on phones, where detailed marks need every pixel */
     .skill-group :global(.logo) {
         flex: none;
-        width: 0.85em;
-        height: 0.85em;
+        width: 1em;
+        height: 1em;
     }
 
     @media (min-width: 40rem) {
         .skills {
             grid-template-columns: repeat(2, 1fr);
+        }
+
+        .skill-group :global(.logo) {
+            width: 0.85em;
+            height: 0.85em;
         }
     }
 
@@ -644,7 +734,71 @@ const sections = [
         }
     }
 
-    /* Footer: the page ends at the email address */
+    /*
+     * Rust: a joke in three beats, set as display type, where weight does the timing: the setup
+     * at statement weight, the confession light, the punchline heavy and larger. Then the serious
+     * answer, a row on the Projects grid.
+     */
+
+    .beats {
+        display: grid;
+        gap: 0.5em;
+        margin-top: clamp(1.5rem, 4vw, 3rem);
+        font-size: clamp(1.625rem, 3.2vw + 0.5rem, 3.5rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+    }
+
+    .setup {
+        max-width: 26ch;
+        font-weight: 700;
+        text-wrap: balance;
+    }
+
+    .confession {
+        font-weight: 300;
+    }
+
+    .punchline {
+        font-size: 1.5em;
+        font-weight: 850;
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+        text-wrap: balance;
+    }
+
+    .rust-answer {
+        display: grid;
+        gap: 1rem var(--gap);
+        margin-top: clamp(2.5rem, 6vw, 4.5rem);
+        padding-top: clamp(1.25rem, 2.5vw, 2rem);
+        border-top: 1px solid var(--ink);
+    }
+
+    .rust-answer :global(p) {
+        max-width: 60ch;
+    }
+
+    /* The sign-off line, at the size of an AI-first point title */
+    .rust-answer :global(strong) {
+        display: block;
+        font-size: clamp(1.375rem, 2.2vw, 2rem);
+        font-weight: 750;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+    }
+
+    @media (min-width: 56rem) {
+        .rust-answer {
+            grid-template-columns: 2fr 5fr 5fr;
+        }
+
+        .rust-answer :global(p) {
+            grid-column: 2 / -1;
+        }
+    }
+
+    /* Footer: the page ends at the email address, with LinkedIn and GitHub beneath it */
 
     .footer {
         margin-top: clamp(6rem, 14vw, 12rem);
@@ -663,6 +817,13 @@ const sections = [
     .sign-off a {
         text-decoration-thickness: 0.06em;
         text-underline-offset: 0.12em;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 1.5em;
+        margin-top: clamp(1.25rem, 3vw, 2rem);
     }
 
     .footer-row {
