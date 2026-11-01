@@ -105,6 +105,14 @@ a:focus-visible {
     height: 0.9em;
 }
 
+/* The smiley logo is drawn for 24px; rem keeps it in step with the reader's text size */
+.smiley {
+    display: block;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;

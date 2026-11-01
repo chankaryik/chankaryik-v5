@@ -14,6 +14,10 @@ _Avoid_: title, tagline, job title
 A person or organization who might hire Chan Kar Yik for freelance work.
 _Avoid_: client, lead
 
+**Smiley**:
+The site's own logo: a smiley face that stands for Chan Kar Yik. Logos of other brands, such as Vue or GitHub, are brand logos.
+_Avoid_: logo, mark, avatar
+
 **Resume**:
 The PDF of Chan Kar Yik's profile that visitors download from the site.
 _Avoid_: CV, résumé

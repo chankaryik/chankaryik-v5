@@ -1,6 +1,7 @@
 ---
 import Icon from '../components/Icon.astro'
 import BrandLogo from '../components/BrandLogo.astro'
+import Smiley from '../components/Smiley.astro'
 import Base from '../layouts/Base.astro'
 import { formatMonth } from '../lib/content'
 import { getHome } from '../lib/home'
@@ -19,6 +20,10 @@ const sections = [
 
 <Base title={`${profile.name} — Frontend Developer`} description={profile.description}>
     <nav class="sections" aria-label="Sections">
+        <a class="home" href="#top">
+            <Smiley />
+            <span class="visually-hidden">Chan Kar Yik, back to top</span>
+        </a>
         <ul>
             {sections.map(({ label, id }) => (
                 <li>
@@ -254,15 +259,20 @@ const sections = [
 
 <style>
     /*
-     * Section nav: one row that stays at the top of the screen. Its paper runs edge to edge so
-     * the page scrolls out of sight beneath it; its 2px rule keeps to the margins like every
-     * other rule. Where the six links do not fit (most phones), the row scrolls sideways to the
-     * screen edges, and the word cut off there shows there is more.
+     * Section nav: one row that stays at the top of the screen, led by the smiley. Its paper runs
+     * edge to edge so the page scrolls out of sight beneath it; its 2px rule keeps to the margins
+     * like every other rule. Where the six links do not fit (most phones), they scroll sideways
+     * between the smiley and the right screen edge, and the word cut off there shows there is
+     * more.
      */
     .sections {
         position: sticky;
         top: 0;
         z-index: 1;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        column-gap: 0.625rem;
         margin-inline: calc(-1 * var(--margin));
         padding-inline: var(--margin);
         background: var(--paper);
@@ -270,15 +280,37 @@ const sections = [
 
     .sections::after {
         content: '';
-        display: block;
+        grid-column: 1 / -1;
         border-bottom: 2px solid var(--ink);
+    }
+
+    /*
+     * The smiley: the site's logo and the way back to the top. It stays put while the links
+     * scroll. Its hover fill is round, the shape of the face. Its tap area is the full bar height,
+     * from the screen edge to halfway to the first link (the bar is its containing block).
+     */
+    .home {
+        border-radius: 50%;
+    }
+
+    /* The ring stays ink and merges with the round fill, so the face turns into one solid disc. A
+       paper ring would leave a grey hairline where its edge meets the fill's. */
+    .home:hover :global(.ring) {
+        stroke: var(--ink);
+    }
+
+    .home::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: calc(var(--margin) + 2.125rem);
     }
 
     .sections ul {
         display: flex;
         gap: 1.25rem;
-        margin-inline: calc(-1 * var(--margin));
-        padding-inline: var(--margin);
+        margin-right: calc(-1 * var(--margin));
+        padding-inline: 0.625rem var(--margin);
         overflow-x: auto;
         scrollbar-width: none;
         font-size: 0.9375rem;
@@ -296,7 +328,7 @@ const sections = [
     }
 
     /* The whole bar height and half of each gap are the tap area; the hover fill stays on the word */
-    .sections a::after {
+    .sections li a::after {
         content: '';
         position: absolute;
         inset: 0 -0.625rem;

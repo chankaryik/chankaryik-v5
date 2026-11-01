@@ -1,11 +1,13 @@
 ---
 import Icon from '../components/Icon.astro'
+import Smiley from '../components/Smiley.astro'
 import Base from '../layouts/Base.astro'
 ---
 
 <Base title="Page not found — Chan Kar Yik" description="This page does not exist.">
     <header class="masthead">
         <a class="home" href="/">
+            <Smiley />
             Chan Kar Yik
         </a>
     </header>
@@ -20,12 +22,17 @@ import Base from '../layouts/Base.astro'
 </Base>
 
 <style>
+    /* A flex row, so the home link's line box is the smiley's height, not the body text's */
     .masthead {
+        display: flex;
         padding: clamp(1rem, 2.5vw, 2rem) 0 0.75rem;
         border-bottom: 2px solid var(--ink);
     }
 
     .home {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
         font-size: 0.9375rem;
         font-weight: 600;
         text-decoration: none;

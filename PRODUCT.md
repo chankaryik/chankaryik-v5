@@ -31,9 +31,9 @@ Opened from a link in a message, a LinkedIn profile or a Resume, on a phone or a
 - Light theme only: off-black on off-white, never `#000` or `#fff`, black, white and greys only. No hue anywhere, including links, focus and selection.
 - Nothing moves: no transitions, animations, smooth scrolling or scroll effects. Hover and focus change instantly.
 - One self-hosted Google Fonts family, one variable woff2, Latin only, upright only, preloaded, `font-display: optional`.
-- No emoji. Brand logos appear only beside skills and the LinkedIn and GitHub links. Every icon, logo or not, is monochrome inline SVG.
+- No emoji. Brand logos appear only beside skills and the LinkedIn and GitHub links. The site's own logo, the Smiley, leads the nav. Every icon, logo or not, is monochrome inline SVG.
 - Latest two versions of Chrome, Edge, Safari and Firefox, from a 360px phone to a wide desktop.
-- Terms come from [GLOSSARY.md](GLOSSARY.md): Headline, Project, Selected Project, Client, Agency, Freelance, Role, Resume.
+- Terms come from [GLOSSARY.md](GLOSSARY.md): Headline, Project, Selected Project, Client, Agency, Freelance, Role, Resume, Smiley.
 
 ## Brand Commitments
 

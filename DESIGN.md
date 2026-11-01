@@ -103,6 +103,7 @@ typography:
     letterSpacing: 'normal'
 rounded:
   none: '0'
+  full: '50%'
 spacing:
   margin: 'clamp(1rem, 4.5vw, 4rem)'
   gap: 'clamp(1rem, 2.5vw, 2rem)'
@@ -124,6 +125,13 @@ components:
     textColor: '{colors.ink}'
     typography: '{typography.small}'
     padding: '0 0 0.75rem'
+  smiley:
+    textColor: '{colors.ink}'
+    size: '1.5rem'
+  smiley-hover:
+    backgroundColor: '{colors.ink}'
+    textColor: '{colors.paper}'
+    rounded: '{rounded.full}'
   row:
     textColor: '{colors.ink}'
     padding: 'clamp(1.25rem, 2.5vw, 2rem) 0'
@@ -202,7 +210,7 @@ Archivo is self-hosted through Astro's fonts API: one variable woff2, axis 100 t
 
 Single column with fluid side margins of clamp(1rem, 4.5vw, 4rem) and a column gap of clamp(1rem, 2.5vw, 2rem). No max-width container: the walls run edge to margin at every width.
 
-From 56rem every content row (AI-first points, Projects, More Projects, Experience, the Rust answer) uses the same three-column grid, 2fr 5fr 5fr: time or icon in the first column, title in the second, body in the third (the Rust answer has no marker and spans the second and third). Below 56rem rows stack, and More Projects rows put the name first with the year pushed right. The intro (About, Contact) splits 7fr 5fr from 56rem. Skills run one column, two from 40rem, four from 64rem. The nav is one sticky row at every width; where it does not fit, it scrolls sideways.
+From 56rem every content row (AI-first points, Projects, More Projects, Experience, the Rust answer) uses the same three-column grid, 2fr 5fr 5fr: time or icon in the first column, title in the second, body in the third (the Rust answer has no marker and spans the second and third). Below 56rem rows stack, and More Projects rows put the name first with the year pushed right. The intro (About, Contact) splits 7fr 5fr from 56rem. Skills run one column, two from 40rem, four from 64rem. The nav is one sticky row at every width, led by the Smiley; where the links do not fit, they scroll sideways.
 
 Vertical rhythm is set by clamps: sections sit clamp(5rem, 12vw, 10rem) apart, the footer clamp(6rem, 14vw, 12rem) below the last section; rows pad clamp(1.25rem, 2.5vw, 2rem) to clamp(1.5rem, 3vw, 2.5rem) top and bottom; More Projects rows pad 0.7rem.
 
@@ -220,7 +228,7 @@ Completely flat. No shadows, no layering, no background panels. Structure and gr
 
 ## Shapes
 
-Square corners everywhere; nothing is rounded. The only drawn forms are horizontal ink rules in three weights, each with one job:
+Square corners everywhere. The one round form is the Smiley, a circle by nature, and its hover fill follows it. Otherwise the only drawn forms are horizontal ink rules in three weights, each with one job:
 
 - **Wall rule** (6px): opens every major section and the footer, and tops the 404 heading.
 - **Label rule** (2px): opens small labels (About, Contact, More Projects, skill group names) and underlines the nav.
@@ -246,11 +254,22 @@ Plainly underlined text that turns into a solid ink block on hover.
 
 ### Navigation
 
-- Six in-page section links in one row, weight 600 at 0.9375rem, gap 1.25rem, 0.75rem above and below, on a 2px rule that keeps to the margins.
+- The Smiley, then six in-page section links in one row, weight 600 at 0.9375rem, gap 1.25rem, 0.75rem above and below, on a 2px rule that keeps to the margins.
 - Sticky at the top of the screen at every width (about 49px tall). Its paper background runs edge to edge so the page passes out of sight beneath it. Section links land 5rem below the top (`scroll-padding-top`) so headings clear the bar.
-- Where the six links do not fit (most phones, below about 416px), the row scrolls sideways out to the screen edges with no scrollbar; the word cut off at the edge shows there is more.
-- Each link's tap area is the full bar height plus half of each gap; the hover fill stays on the word.
+- Where the six links do not fit (most phones, below about 500px), they scroll sideways with no scrollbar, between the Smiley and the right screen edge. The Smiley stays put, and the word cut off at either end shows there is more.
+- Each link's tap area is the full bar height plus half of each gap; the hover fill stays on the word. The Smiley's tap area runs the full bar height from the left screen edge to halfway to the first link.
 - Hover follows the link inversion. Being sticky is a fixed position, not motion: nothing animates.
+
+### Smiley
+
+The site's logo (`src/components/Smiley.astro`). It is the favicon's face, redrawn on a 24px grid so the ring and the grin land on whole pixels at 1.5rem: a 2px ring, 3px dot eyes and a 2px grin with round caps, all in currentColor. The face inside the ring is left empty.
+
+- **In the nav:** it leads the bar as the link back to the top, read aloud as "Chan Kar Yik, back to top", centred in the bar and 1.25rem before the first link.
+- **Hover:** the fill is round, the shape of the face, and the ring stays ink, so the Smiley turns into one solid ink disc with paper eyes and grin. A paper ring would leave a grey hairline where its edge meets the fill's.
+- **Focus:** the usual 3px outline at 3px offset, which follows the circle.
+- **On the 404 page:** it sits beside the name in the home link, 0.625rem apart, and inverts with the text like any link icon.
+
+It appears nowhere else on a page; the favicon, the home-screen icon and the share image are its other uses.
 
 ### Wall heading (signature)
 
@@ -295,7 +314,8 @@ Filled brand marks (`src/components/BrandLogo.astro`) beside skills and the Link
 
 - **Don't** use #000, #fff, greys, opacity tints or any hue.
 - **Don't** add transitions, animations or scroll effects; every state change is instant.
-- **Don't** use shadows, rounded corners, cards, chips or tinted panels.
+- **Don't** use shadows, rounded corners, cards, chips or tinted panels. The Smiley's circle is the one round form.
+- **Don't** use the Smiley as decoration; it leads the nav and the 404 home link, and nothing else.
 - **Don't** add a second font family or italics; one self-hosted upright Archivo is the whole type system.
 - **Don't** use image files or icon fonts; icons and logos are inline SVG.
 - **Don't** add client-side JavaScript for any visual behaviour.

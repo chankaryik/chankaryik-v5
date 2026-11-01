@@ -2,7 +2,7 @@
 
 The agreed requirements for v5 of www.chankaryik.com, settled in the requirements interview on 2026-10-31. This is the brief for the impeccable design pass and for the build.
 
-Capitalized terms (**Headline**, **Prospect**, **Project**, **Selected Project**, **Client**, **Agency**, **Freelance**, **Role**, **Resume**, **Post**) are defined in [GLOSSARY.md](../GLOSSARY.md). Hard-to-reverse decisions live in [ADR 0001](adr/0001-zero-client-javascript.md) (zero JavaScript, no image files) and [ADR 0002](adr/0002-astro-static-site.md) (Astro).
+Capitalized terms (**Headline**, **Prospect**, **Project**, **Selected Project**, **Client**, **Agency**, **Freelance**, **Role**, **Resume**, **Post**, **Smiley**) are defined in [GLOSSARY.md](../GLOSSARY.md). Hard-to-reverse decisions live in [ADR 0001](adr/0001-zero-client-javascript.md) (zero JavaScript, no image files) and [ADR 0002](adr/0002-astro-static-site.md) (Astro).
 
 v4 (`../chankaryik-v4`, a Vue single-page app) is the source for all existing content.
 
@@ -24,7 +24,8 @@ Simple, with an eye-catching style, on phones and desktop. Impeccable decides th
 - **Black, white and a few greys.** No colour anywhere, including links, focus outlines and text selection.
 - **No emoji.** Brand logos appear only beside skills (see [Skills](#7-skills)) and the LinkedIn and GitHub links in Contact and the footer. Every icon, logo or not, is monochrome inline SVG.
 - **Nothing moves.** No transitions, animations, smooth scrolling, scroll effects, loaders or skeletons. Hover and focus states are allowed but change instantly.
-- **The section nav stays at the top of the screen,** as one row at every width. On phones it scrolls sideways when the links don't fit. Staying put is a fixed position, not motion, so it is allowed.
+- **The section nav stays at the top of the screen,** as one row at every width. On phones the links scroll sideways when they don't fit. Staying put is a fixed position, not motion, so it is allowed.
+- **The Smiley is the site's logo.** The face from the favicon starts the nav and links back to the top, and stays put while the links scroll. It is inline SVG, not an image file or an emoji. Chan Kar Yik adopted it as the logo on 2026-11-01.
 - **One Google Fonts family for all text,** self-hosted: one variable file, Latin characters only, upright only. It is preloaded and uses `font-display: optional`, so on a slow first visit the page shows a system font and never swaps font while someone is reading. An italic file is added only when the blog arrives.
 
 ## Hard rules
@@ -142,8 +143,8 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 - Canonical address on `www.chankaryik.com`.
 - `sitemap.xml` and `robots.txt`.
 - JSON-LD `Person` structured data: name, job title, LinkedIn and GitHub.
-- One 1200×630 share image showing the name and Headline in the site's font and colours, made after the impeccable pass.
-- `favicon.ico` (16, 32 and 48px) and `apple-touch-icon.png` (180px): a circle split straight across the middle, ink above and paper below, in the site's two colours. It is not a yin-yang. An ink ring keeps the paper half visible on a light tab bar; on a very dark one, the ink half fades into the bar. The touch icon puts the circle on paper with a 6px ring, the weight of the site's wall rule, because iOS shows transparency as black. It replaced v4's photo on 2026-11-01.
+- One 1200×630 share image, `share.png`: the Smiley, 450px across and centred both ways on paper, so it stays large in link previews and survives a square crop. Linked from the page head with `og:image` and a large Twitter card.
+- `favicon.ico` (16, 32 and 48px) and `apple-touch-icon.png` (180px): the Smiley, in the site's two colours. It is a paper circle in an ink ring, with two dot eyes and a short U-shaped grin in ink. It is drawn on a 16px grid so every line lands on whole or half pixels, and the larger sizes scale the same drawing. The ring keeps the circle visible on a light tab bar, and the paper face stands out on a dark one. The touch icon sits on paper because iOS shows transparency as black. It replaced v4's photo, then a half-ink circle, on 2026-11-01.
 - v4's Facebook app ID tag is dropped.
 
 ## Tech

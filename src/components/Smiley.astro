@@ -1,0 +1,34 @@
+---
+// The site's logo: the favicon's smiley, redrawn on a 24px grid so the ring and the grin land on
+// whole pixels at nav size. It inherits the text colour, and the face is left empty so a link's
+// hover fill shows through. It is hidden from assistive tech, so the link around it must name it.
+---
+
+<svg
+    class="smiley"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    aria-hidden="true"
+    focusable="false"
+    fill="currentColor"
+>
+    <circle
+        class="ring"
+        cx="12"
+        cy="12"
+        r="11"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+    ></circle>
+    <circle cx="9" cy="9" r="1.5"></circle>
+    <circle cx="15" cy="9" r="1.5"></circle>
+    <path
+        d="M7 15A5.125 5.125 0 0 0 17 15"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+    ></path>
+</svg>
