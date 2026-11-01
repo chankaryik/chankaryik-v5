@@ -3,7 +3,7 @@ import Icon from '../components/Icon.astro'
 import BrandLogo from '../components/BrandLogo.astro'
 import Base from '../layouts/Base.astro'
 import { formatMonth } from '../lib/content'
-import { getHome, resumeHref } from '../lib/home'
+import { getHome } from '../lib/home'
 
 const { profile, aiFirst, selectedProjects, otherProjects, experience, skills, rust } =
     await getHome()
@@ -68,12 +68,6 @@ const sections = [
                         <a href={profile.github}>
                             <BrandLogo name="GitHub" />
                             <span>GitHub</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href={resumeHref} download>
-                            <Icon name="download" />
-                            <span>Resume (PDF)</span>
                         </a>
                     </li>
                 </ul>

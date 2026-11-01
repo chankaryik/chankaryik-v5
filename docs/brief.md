@@ -59,7 +59,6 @@ Two to four sentences in Chan Kar Yik's own voice, including that they work AI-f
 - Email: chankaryik8@gmail.com
 - LinkedIn: https://www.linkedin.com/in/chankaryik/
 - GitHub: https://github.com/chankaryik
-- Resume download (see [Resume](#resume))
 - One neutral line inviting contact about roles, projects or anything web. The exact wording is drafted with the rest of the copy. There is no "available for hire" status.
 
 ### 4. AI-first
@@ -119,13 +118,6 @@ A light aside, not in the nav. It jokes about everything being rewritten in Rust
 
 Decided in impeccable: the email address set large, then the LinkedIn and GitHub links again, then the copyright and a back-to-top link.
 
-## Resume
-
-- **The file:** a PDF, `Chan-Kar-Yik-Resume.pdf`, generated on every build. A headless browser renders the home page with its print layout and saves the PDF, so it never drifts from the site.
-- **The link:** a plain download link, with no JavaScript.
-- **Layout:** A4, two pages at most, with everything on the home page. Links are printed as readable addresses, and anything that only makes sense on screen is hidden.
-- **To verify while building:** whether this runs in Vercel's build or locally before pushing.
-
 ## Content and copy
 
 All content lives in data files that Astro checks on every build:
@@ -171,12 +163,17 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 
 1. **Setup:** git, Astro, v4 content moved into data files, and copy drafts for review.
 2. **Design:** impeccable sets the look and builds the page with the real copy.
-3. **Finishing:** the Resume PDF, SEO, icons and the share image.
+3. **Finishing:** SEO, icons and the share image.
 4. **Going live.**
 
 ## Later
 
 - **Automated checks:** a GitHub Actions workflow that fails the build on any JavaScript, an over-budget first load, extra image files, requests to other hosts, or a Lighthouse score below 100.
+- **The Resume PDF:** moved to the backlog on 2026-11-01, since it isn't important yet. Until it ships, Contact has no Resume link.
+  - The file: `Chan-Kar-Yik-Resume.pdf`, generated on every build. A headless browser renders the home page with its print layout and saves the PDF, so it never drifts from the site.
+  - The link: a plain download link in Contact, with no JavaScript.
+  - Layout: A4, two pages at most, with everything on the home page. Links are printed as readable addresses, and anything that only makes sense on screen, like the sticky nav, is hidden.
+  - To decide: whether it runs in Vercel's build or locally before pushing.
 - **The blog:**
   - Posts at `/blog/` and `/blog/<post-name>/`, with no dates in addresses.
   - An RSS feed.

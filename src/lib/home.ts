@@ -13,6 +13,3 @@ export async function getHome() {
         rust: await getRust(),
     }
 }
-
-/** The Resume PDF, generated in a later step. */
-export const resumeHref = '/Chan-Kar-Yik-Resume.pdf'

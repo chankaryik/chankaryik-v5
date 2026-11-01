@@ -22,7 +22,7 @@ The site is its own proof: a frontend developer's portfolio that sends no JavaSc
 
 ## Operating Context
 
-Opened from a link in a message, a LinkedIn profile or a Resume, on a phone or a desktop, often between other tasks. Read once, quickly. The same page is printed to A4 as the Resume PDF in a later step.
+Opened from a link in a message, a LinkedIn profile or a Resume, on a phone or a desktop, often between other tasks. Read once, quickly. A Resume PDF printed from the same page is on the backlog.
 
 ## Capabilities and Constraints
 
