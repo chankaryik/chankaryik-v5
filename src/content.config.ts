@@ -11,6 +11,8 @@ const about = defineCollection({
     schema: z.object({
         name: z.string(),
         headline: z.string(),
+        // The craft alone, for the page title and structured data
+        jobTitle: z.string(),
         location: z.string(),
         description: z.string(),
         email: z.email(),

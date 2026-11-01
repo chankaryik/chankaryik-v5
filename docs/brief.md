@@ -140,9 +140,10 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 ## SEO
 
 - Page title "Chan Kar Yik — Frontend Developer", plus a meta description.
-- Canonical address on `www.chankaryik.com`.
-- `sitemap.xml` and `robots.txt`.
-- JSON-LD `Person` structured data: name, job title, LinkedIn and GitHub.
+- Canonical address on `www.chankaryik.com`. The 404 page has no canonical address and is marked `noindex`, so it stays out of search results.
+- Open Graph title, description, address, type and site name, so link previews read well.
+- `sitemap.xml` lists only `/`, and `robots.txt` points to it. Both are built from `site` in `astro.config.mjs`, so the domain is set in one place.
+- JSON-LD `Person` structured data: name, job title, the site's address, LinkedIn and GitHub. It comes from `src/content/about.md`, and it is the page's only script tag.
 - One 1200×630 share image, `share.png`: the Smiley, 450px across and centred both ways on paper, so it stays large in link previews and survives a square crop. Linked from the page head with `og:image` and a large Twitter card.
 - `favicon.ico` (16, 32 and 48px) and `apple-touch-icon.png` (180px): the Smiley, in the site's two colours. It is a paper circle in an ink ring, with two dot eyes and a short U-shaped grin in ink. It is drawn on a 16px grid so every line lands on whole or half pixels, and the larger sizes scale the same drawing. The ring keeps the circle visible on a light tab bar, and the paper face stands out on a dark one. The touch icon sits on paper because iOS shows transparency as black. It replaced v4's photo, then a half-ink circle, on 2026-11-01.
 - v4's Facebook app ID tag is dropped.
@@ -166,6 +167,8 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 2. **Design:** impeccable sets the look and builds the page with the real copy.
 3. **Finishing:** SEO, icons and the share image.
 4. **Going live.**
+
+Steps 1 to 3 were done by 2026-11-01. Going live is next.
 
 ## Later
 

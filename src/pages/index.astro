@@ -16,9 +16,19 @@ const sections = [
     { label: 'Experience', id: 'experience' },
     { label: 'Skills', id: 'skills' },
 ]
+// Structured data for search engines. Browsers never run this script type, so ADR 0001 allows it.
+const person = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile.name,
+    jobTitle: profile.jobTitle,
+    url: new URL('/', Astro.site).href,
+    sameAs: [profile.linkedin, profile.github],
+}
 ---
 
-<Base title={`${profile.name} — Frontend Developer`} description={profile.description}>
+<Base title={`${profile.name} — ${profile.jobTitle}`} description={profile.description}>
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(person)} />
     <nav class="sections" aria-label="Sections">
         <a class="home" href="#top">
             <Smiley />

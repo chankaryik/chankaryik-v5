@@ -1,6 +1,7 @@
 ---
 name: Chan Kar Yik
 headline: Frontend Developer, est. 2018
+jobTitle: Frontend Developer
 location: Kuala Lumpur, Malaysia
 description: Website portfolio of Chan Kar Yik, a Frontend Developer based in Kuala Lumpur, Malaysia.
 email: chankaryik8@gmail.com
