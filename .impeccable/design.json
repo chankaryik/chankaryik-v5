@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T00:00:00Z",
+  "generatedAt": "2026-11-01T14:30:00Z",
   "title": "Design System: Chan Kar Yik",
   "extensions": {
     "colorMeta": {
@@ -20,7 +20,7 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The name in the masthead only; the 404 heading uses the same treatment at clamp(3rem, 11vw, 9.5rem)."
+        "purpose": "The name in the masthead only."
       },
       "headline": {
         "displayName": "Wall Headline",
@@ -28,11 +28,43 @@
       },
       "statement": {
         "displayName": "Statement",
-        "purpose": "Near-display paragraph under a wall heading, max 26ch."
+        "purpose": "Near-display paragraph under a wall heading, max 26ch; also the three beats of the Rust aside."
       },
       "title": {
         "displayName": "Row Title",
-        "purpose": "Project names; companies and AI-first points use smaller clamps at weight 750."
+        "purpose": "Project names."
+      },
+      "page-title": {
+        "displayName": "Page Title",
+        "purpose": "The 404 heading: the Display treatment at a smaller clamp."
+      },
+      "sign-off": {
+        "displayName": "Sign-off",
+        "purpose": "The closing email address in the footer."
+      },
+      "role-title": {
+        "displayName": "Role Title",
+        "purpose": "Company names in Experience."
+      },
+      "point-title": {
+        "displayName": "Point Title",
+        "purpose": "AI-first points and the Rust sign-off."
+      },
+      "lede": {
+        "displayName": "Lead",
+        "purpose": "The About paragraph, max 34ch."
+      },
+      "link-list": {
+        "displayName": "Link List",
+        "purpose": "Contact links, the footer's LinkedIn and GitHub links, and the 404 return link."
+      },
+      "list-item": {
+        "displayName": "List Item",
+        "purpose": "Skill names."
+      },
+      "year": {
+        "displayName": "Year",
+        "purpose": "Selected Project years, tabular, in the first grid column."
       },
       "subhead": {
         "displayName": "Masthead Subhead",
@@ -74,8 +106,17 @@
       "fill": "none",
       "color": "currentColor"
     },
+    "logo": {
+      "name": "Smiley",
+      "grid": "24px",
+      "size": "1.5rem",
+      "ring": "2px stroke",
+      "eyes": "3px dots",
+      "grin": "2px stroke, round caps",
+      "color": "currentColor",
+      "source": "src/components/Smiley.astro"
+    },
     "breakpoints": [
-      { "name": "nav-row", "value": "34rem" },
       { "name": "skills-2", "value": "40rem" },
       { "name": "grid", "value": "56rem" },
       { "name": "skills-4", "value": "64rem" }
@@ -87,24 +128,32 @@
       "kind": "custom",
       "refersTo": "link",
       "description": "Underlined inline link that inverts to solid ink on hover, instantly.",
-      "html": "<p class=\"ds-text\">Read the <a class=\"ds-link\" href=\"#\">case study</a> for details.</p>",
-      "css": ".ds-text { font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.125rem; line-height: 1.5; color: #1A1A1A; background: #F2F2F2; margin: 0; } .ds-link { color: inherit; text-decoration-line: underline; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; } .ds-link:hover { background: #1A1A1A; color: #F2F2F2; text-decoration: none; } .ds-link:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 3px; }"
+      "html": "<p class=\"ds-text\">I like pages that load fast and <a class=\"ds-link\" href=\"#\">read easily</a>.</p>",
+      "css": ".ds-text { font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.125rem; line-height: 1.5; color: var(--ink, #1A1A1A); background: var(--paper, #F2F2F2); margin: 0; } .ds-link { color: inherit; text-decoration-line: underline; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; } .ds-link:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); text-decoration: none; } .ds-link:focus-visible { outline: 3px solid var(--ink, #1A1A1A); outline-offset: 3px; }"
     },
     {
       "name": "Contact Link With Icon",
       "kind": "custom",
       "refersTo": "link",
-      "description": "Large link led by a 2px-stroke line icon; icon inverts with the text.",
-      "html": "<a class=\"ds-icon-link\" href=\"#\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2.5 4.5h15v11h-15zM2.5 5.5 10 11l7.5-5.5\"/></svg><span>hello@example.com</span></a>",
-      "css": ".ds-icon-link { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.5rem; font-weight: 650; letter-spacing: -0.015em; color: #1A1A1A; text-decoration-line: underline; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; } .ds-icon-link svg { flex: none; width: 0.8em; height: 0.8em; } .ds-icon-link:hover { background: #1A1A1A; color: #F2F2F2; text-decoration: none; } .ds-icon-link:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 3px; }"
+      "description": "Large link led by a 2px-stroke line icon; the icon inverts with the text.",
+      "html": "<a class=\"ds-icon-link\" href=\"#\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2.5 4.5h15v11h-15zM2.5 5.5 10 11l7.5-5.5\"/></svg><span>chankaryik8@gmail.com</span></a>",
+      "css": ".ds-icon-link { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font, Archivo, Arial, sans-serif); font-size: clamp(1.25rem, 1.4vw + 0.7rem, 1.75rem); font-weight: 650; letter-spacing: -0.015em; color: var(--ink, #1A1A1A); text-decoration-line: underline; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; overflow-wrap: anywhere; } .ds-icon-link svg { flex: none; width: 0.8em; height: 0.8em; } .ds-icon-link:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); text-decoration: none; } .ds-icon-link:focus-visible { outline: 3px solid var(--ink, #1A1A1A); outline-offset: 3px; }"
     },
     {
       "name": "Section Nav",
       "kind": "nav",
       "refersTo": "nav",
-      "description": "Six in-page links on a 2px rule; 3 by 2 on phones, one row from 34rem.",
-      "html": "<nav class=\"ds-nav\"><ul><li><a href=\"#\">About</a></li><li><a href=\"#\">Contact</a></li><li><a href=\"#\">AI-first</a></li><li><a href=\"#\">Projects</a></li><li><a href=\"#\">Experience</a></li><li><a href=\"#\">Skills</a></li></ul></nav>",
-      "css": ".ds-nav ul { display: grid; grid-template-columns: repeat(6, max-content); gap: 0.25rem 1.25rem; margin: 0; padding: 0 0 0.75rem; list-style: none; border-bottom: 2px solid #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 0.9375rem; font-weight: 600; } .ds-nav a { color: #1A1A1A; text-decoration: none; } .ds-nav a:hover { background: #1A1A1A; color: #F2F2F2; } .ds-nav a:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 3px; }"
+      "description": "Sticky single row on a 2px rule at every width, led by the Smiley; where the six links do not fit, they scroll sideways while the Smiley stays put.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Sections\"><a class=\"ds-nav-home\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"currentColor\" aria-hidden=\"true\"><circle class=\"ds-ring\" cx=\"12\" cy=\"12\" r=\"11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"1.5\"/><circle cx=\"15\" cy=\"9\" r=\"1.5\"/><path d=\"M7 15A5.125 5.125 0 0 0 17 15\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg><span class=\"ds-hidden\">Chan Kar Yik, back to top</span></a><ul><li><a href=\"#\">About</a></li><li><a href=\"#\">Contact</a></li><li><a href=\"#\">AI-first</a></li><li><a href=\"#\">Projects</a></li><li><a href=\"#\">Experience</a></li><li><a href=\"#\">Skills</a></li></ul></nav>",
+      "css": ".ds-nav { position: sticky; top: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 0.625rem; background: var(--paper, #F2F2F2); color: var(--ink, #1A1A1A); border-bottom: 2px solid var(--ink, #1A1A1A); font-family: var(--font, Archivo, Arial, sans-serif); } .ds-nav-home { display: block; border-radius: 50%; color: inherit; } .ds-nav-home svg { display: block; width: 1.5rem; height: 1.5rem; } .ds-nav-home:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); } .ds-nav-home:hover .ds-ring { stroke: var(--ink, #1A1A1A); } .ds-nav ul { display: flex; gap: 1.25rem; margin: 0; padding: 0 0 0 0.625rem; list-style: none; overflow-x: auto; scrollbar-width: none; white-space: nowrap; font-size: 0.9375rem; font-weight: 600; } .ds-nav li { padding-block: 0.75rem; } .ds-nav ul a { color: inherit; text-decoration: none; } .ds-nav ul a:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); } .ds-nav a:focus-visible { outline: 3px solid var(--ink, #1A1A1A); outline-offset: 3px; } .ds-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }"
+    },
+    {
+      "name": "Smiley",
+      "kind": "custom",
+      "refersTo": "smiley",
+      "description": "The site's logo, inline SVG in currentColor. On hover the round fill and the ink ring merge into one solid disc with paper eyes and grin.",
+      "html": "<a class=\"ds-smiley\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"currentColor\" aria-hidden=\"true\"><circle class=\"ds-smiley-ring\" cx=\"12\" cy=\"12\" r=\"11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"1.5\"/><circle cx=\"15\" cy=\"9\" r=\"1.5\"/><path d=\"M7 15A5.125 5.125 0 0 0 17 15\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg><span class=\"ds-smiley-name\">Chan Kar Yik, back to top</span></a>",
+      "css": ".ds-smiley { display: inline-block; border-radius: 50%; color: var(--ink, #1A1A1A); } .ds-smiley svg { display: block; width: 1.5rem; height: 1.5rem; } .ds-smiley:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); } .ds-smiley:hover .ds-smiley-ring { stroke: var(--ink, #1A1A1A); } .ds-smiley:focus-visible { outline: 3px solid var(--ink, #1A1A1A); outline-offset: 3px; } .ds-smiley-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }"
     },
     {
       "name": "Wall Heading",
@@ -112,7 +161,7 @@
       "refersTo": "wall-heading",
       "description": "Section opener: 6px ink rule, then weight-850 headline.",
       "html": "<h2 class=\"ds-wall\">Projects</h2>",
-      "css": ".ds-wall { margin: 0; padding-top: 0.5rem; border-top: 6px solid #1A1A1A; color: #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: clamp(2.75rem, 8.5vw, 7.5rem); font-weight: 850; line-height: 0.95; letter-spacing: -0.045em; }"
+      "css": ".ds-wall { margin: 0; padding-top: 0.5rem; border-top: 6px solid var(--ink, #1A1A1A); color: var(--ink, #1A1A1A); font-family: var(--font, Archivo, Arial, sans-serif); font-size: clamp(2.75rem, 8.5vw, 7.5rem); font-weight: 850; line-height: 0.95; letter-spacing: -0.045em; }"
     },
     {
       "name": "Label",
@@ -120,15 +169,23 @@
       "refersTo": "label",
       "description": "Small heading on a 2px rule for sub-sections and groups.",
       "html": "<h3 class=\"ds-label\">More Projects</h3>",
-      "css": ".ds-label { margin: 0; padding-top: 0.75rem; border-top: 2px solid #1A1A1A; color: #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1rem; font-weight: 700; }"
+      "css": ".ds-label { margin: 0; padding-top: 0.75rem; border-top: 2px solid var(--ink, #1A1A1A); color: var(--ink, #1A1A1A); font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1rem; font-weight: 700; }"
     },
     {
       "name": "Grid Row",
       "kind": "custom",
       "refersTo": "row",
-      "description": "Content row on the 2fr 5fr 5fr grid with a 1px rule on top.",
-      "html": "<div class=\"ds-row\"><p class=\"ds-row-year\">2025</p><div><h3 class=\"ds-row-title\">MSIG Corporate Website</h3><p class=\"ds-row-meta\">MSIG Malaysia</p></div><p class=\"ds-row-body\">Led the frontend of the new corporate site.</p></div>",
-      "css": ".ds-row { display: grid; grid-template-columns: 2fr 5fr 5fr; gap: 0.75rem 2rem; padding: 2rem 0; border-top: 1px solid #1A1A1A; color: #1A1A1A; font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.125rem; line-height: 1.5; } .ds-row p, .ds-row h3 { margin: 0; } .ds-row-year { font-weight: 700; font-variant-numeric: tabular-nums; } .ds-row-title { font-size: clamp(1.75rem, 3.4vw, 3rem); font-weight: 750; line-height: 1.02; letter-spacing: -0.03em; } .ds-row-meta { margin-top: 0.75rem; font-weight: 600; } .ds-row-body { max-width: 60ch; }"
+      "description": "Content row on the 2fr 5fr 5fr grid with a 1px rule on top; stacks below 56rem.",
+      "html": "<div class=\"ds-row\"><p class=\"ds-row-year\">2025</p><div><h3 class=\"ds-row-title\">MSIG Corporate Website</h3><p class=\"ds-row-meta\">MSIG Malaysia</p></div><p class=\"ds-row-body\">I led frontend and backend development, and added an Azure OpenAI chatbot for customer support.</p></div>",
+      "css": ".ds-row { display: grid; grid-template-columns: 2fr 5fr 5fr; gap: 0.75rem clamp(1rem, 2.5vw, 2rem); padding: clamp(1.5rem, 3vw, 2.5rem) 0; border-top: 1px solid var(--ink, #1A1A1A); color: var(--ink, #1A1A1A); font-family: var(--font, Archivo, Arial, sans-serif); font-size: 1.125rem; line-height: 1.5; } .ds-row p, .ds-row h3 { margin: 0; } .ds-row-year { font-size: clamp(1.125rem, 1.5vw, 1.375rem); font-weight: 700; font-variant-numeric: tabular-nums; } .ds-row-title { font-size: clamp(1.75rem, 3.4vw, 3rem); font-weight: 750; line-height: 1.02; letter-spacing: -0.03em; } .ds-row-meta { margin-top: 0.75rem; font-weight: 600; } .ds-row-body { max-width: 60ch; }"
+    },
+    {
+      "name": "Sign-off",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "The footer's closing email address on a 6px wall rule, with a thinner, closer underline at its size.",
+      "html": "<footer class=\"ds-footer\"><p class=\"ds-sign-off\"><a href=\"#\">chankaryik8@gmail.com</a></p></footer>",
+      "css": ".ds-footer { padding-top: 1rem; border-top: 6px solid var(--ink, #1A1A1A); color: var(--ink, #1A1A1A); font-family: var(--font, Archivo, Arial, sans-serif); } .ds-sign-off { margin: 0; font-size: clamp(1.75rem, 6.2vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -0.04em; overflow-wrap: anywhere; } .ds-sign-off a { color: inherit; text-decoration-line: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.12em; } .ds-sign-off a:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); text-decoration: none; } .ds-sign-off a:focus-visible { outline: 3px solid var(--ink, #1A1A1A); outline-offset: 3px; }"
     }
   ],
   "narrative": {
@@ -195,7 +252,8 @@
     "donts": [
       "Don't use #000, #fff, greys, opacity tints or any hue.",
       "Don't add transitions, animations or scroll effects; every state change is instant.",
-      "Don't use shadows, rounded corners, cards, chips or tinted panels.",
+      "Don't use shadows, rounded corners, cards, chips or tinted panels. The Smiley's circle is the one round form.",
+      "Don't use the Smiley as decoration; it leads the nav and the 404 home link, and nothing else.",
       "Don't add a second font family or italics; one self-hosted upright Archivo is the whole type system.",
       "Don't use image files or icon fonts; icons and logos are inline SVG.",
       "Don't add client-side JavaScript for any visual behaviour."

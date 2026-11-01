@@ -19,7 +19,7 @@ The site's own logo: a smiley face that stands for Chan Kar Yik. Logos of other 
 _Avoid_: logo, mark, avatar
 
 **Resume**:
-The PDF of Chan Kar Yik's profile that visitors download from the site.
+The PDF of Chan Kar Yik's profile, meant for visitors to download. It is planned and not on the site yet.
 _Avoid_: CV, résumé
 
 **Post**:
@@ -33,7 +33,7 @@ A shipped piece of work built for a Client.
 _Avoid_: work, case study, portfolio item
 
 **Selected Project**:
-One of about six Projects shown in full on the home page. Every other Project is listed on a single line.
+A Project Chan Kar Yik has chosen to show in full on the home page. Every other Project is listed on a single line.
 _Avoid_: featured project, highlight
 
 **Client**:

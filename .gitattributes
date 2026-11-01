@@ -1,0 +1,7 @@
+# Text files use LF line endings in the repo and in every working copy, whatever the OS
+* text=auto eol=lf
+
+# Binary files are never converted
+*.png binary
+*.ico binary
+*.woff2 binary
