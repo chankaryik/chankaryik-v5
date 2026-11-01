@@ -157,9 +157,23 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 
 ## Going live
 
-1. Create the public GitHub repo `chankaryik/chankaryik-v5` and a new Vercel project for it.
-2. Check the hard rules by hand on the preview URL.
-3. Move `chankaryik.com` and `www.chankaryik.com` from the `chankaryik-v4` Vercel project. `www` stays canonical, and the bare domain redirects to it.
+Planned with Chan Kar Yik on 2026-11-01.
+
+1. **GitHub:** push `main` to the public repo `chankaryik/chankaryik-v5`. Done on 2026-11-01.
+2. **Vercel:** a new project, `chankaryik-v5`, in the same team as v4, built from the repo. Done on 2026-11-01.
+   - Settings: the Astro preset, `npm run build`, output `dist`, Node 24.x, production branch `main`, and no environment variables.
+   - Web Analytics and Speed Insights stay off, and so does the Vercel toolbar, since all three add JavaScript.
+   - Deployment Protection keeps the team default. The production address, `chankaryik-v5.vercel.app`, is public anyway; only per-deploy addresses ask for a Vercel sign-in.
+3. **Check the hard rules** on `chankaryik-v5.vercel.app`. Done on 2026-11-01: all passed, with a 54 KB first load and PageSpeed Insights mobile scores of 100, 100, 100 and 100.
+   - no JavaScript beyond the JSON-LD tag
+   - a first load of at most 100 KB
+   - no requests to other hosts, and no image files on the page
+   - Lighthouse mobile 100 in all four categories, through PageSpeed Insights
+   - `robots.txt` and `sitemap.xml` load, and an unknown address returns the 404 page with a 404 status
+4. **Move the domains** in the Vercel dashboard. Add `www.chankaryik.com` to v5 and accept the move from `chankaryik-v4`. Then add `chankaryik.com` with a 308 redirect to www. `www` stays canonical, and DNS does not change. Done on 2026-11-01.
+5. **After the switch:** check the redirect, run the same checks on the live address, and refresh link previews with LinkedIn's Post Inspector. The checks passed on 2026-11-01: `chankaryik.com` and plain `http` addresses redirect (308) to `https://www.chankaryik.com/`, the first load is 54 KB, and PageSpeed Insights mobile scores 100 in all four categories. The LinkedIn refresh is Chan Kar Yik's to do.
+
+If anything fails, moving the two domains back restores v4. The `chankaryik-v4` project stays untouched until about 2026-11-15, then is paused. v4 had no routes, no downloads and no service worker, so no old addresses need redirects and returning visitors get v5 straight away.
 
 ## Order of work
 
@@ -168,7 +182,7 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 3. **Finishing:** SEO, icons and the share image.
 4. **Going live.**
 
-Steps 1 to 3 were done by 2026-11-01. Going live is next.
+All four steps were done on 2026-11-01, when v5 went live at www.chankaryik.com.
 
 ## Later
 
