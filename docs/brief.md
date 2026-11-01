@@ -151,6 +151,10 @@ Later the same day Chan Kar Yik corrected their part in MSIG and Brunei (they le
 ## Tech
 
 - Astro, static output, deployed on Vercel.
+- Security headers in `vercel.json`, added on 2026-11-01 after PageSpeed Insights suggested them:
+  - A Content Security Policy that allows no scripts and only same-origin styles, fonts and images, and blocks framing. Inline styles are allowed because Astro inlines the CSS.
+  - `Cross-Origin-Opener-Policy: same-origin` and `X-Frame-Options: DENY`.
+  - HSTS for two years with `includeSubDomains` and `preload`, sent only from `www.chankaryik.com`. Other subdomains of `chankaryik.com` (such as `cms`) live elsewhere, so the bare domain must never send `includeSubDomains`. The site has not been submitted to the HSTS preload list.
 - npm, TypeScript strict, Node 24.
 - Prettier with v4's settings: no semicolons, single quotes, print width 100, tab width 4.
 - Browsers: the latest two versions of Chrome, Edge, Safari and Firefox, on desktop and mobile.
