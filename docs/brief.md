@@ -74,7 +74,7 @@ This section says what work Chan Kar Yik wants; the contact line stays neutral.
 
 ### 5. Projects
 
-Six **Selected Projects** shown in full: Client, Agency (shown as "via …") or "Freelance", stack, year, two short lines leading with the outcome, and a link when one exists.
+Six **Selected Projects** shown in full: Client, Agency (marked with an arrow icon, read aloud as "via …") or "Freelance", stack, year, two short lines leading with the outcome, and a link when one exists.
 
 | Project                                   | Client                            | Agency              | Year |
 | ----------------------------------------- | --------------------------------- | ------------------- | ---- |
