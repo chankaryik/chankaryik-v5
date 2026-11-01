@@ -1,92 +1,683 @@
 ---
-// Unstyled structure with the real content. The impeccable design pass owns the markup and styles.
+import Icon from '../components/Icon.astro'
+import SkillLogo from '../components/SkillLogo.astro'
 import Base from '../layouts/Base.astro'
-import { formatMonth, getExperience, getProfile, getProjects, getSkills } from '../lib/content'
+import { formatMonth } from '../lib/content'
+import { getHome, resumeHref } from '../lib/home'
 
-const profile = await getProfile()
-const projects = await getProjects()
-const selectedProjects = projects.filter((project) => project.selected)
-const otherProjects = projects.filter((project) => !project.selected)
-const experience = await getExperience()
-const skills = await getSkills()
+const { profile, aiFirst, selectedProjects, otherProjects, experience, skills } = await getHome()
+const sections = [
+    { label: 'About', id: 'about' },
+    { label: 'Contact', id: 'contact' },
+    { label: aiFirst.heading, id: 'ai-first' },
+    { label: 'Projects', id: 'projects' },
+    { label: 'Experience', id: 'experience' },
+    { label: 'Skills', id: 'skills' },
+]
 ---
 
 <Base title={`${profile.name} — Frontend Developer`} description={profile.description}>
-    <header>
+    <header class="masthead" id="top">
+        <nav aria-label="Sections">
+            <ul>
+                {sections.map(({ label, id }) => (
+                    <li>
+                        <a href={`#${id}`}>{label}</a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
         <h1>{profile.name}</h1>
-        <p>{profile.headline}</p>
+        <p class="headline">{profile.headline}</p>
+        <p class="location">
+            <Icon name="pin" />
+            {profile.location}
+        </p>
     </header>
 
     <main>
-        <section aria-labelledby="about">
-            <h2 id="about">About</h2>
-            <profile.About />
-        </section>
+        <div class="intro">
+            <section class="about" aria-labelledby="about">
+                <h2 id="about" class="label">
+                    About
+                </h2>
+                <profile.About />
+            </section>
 
-        <section aria-labelledby="contact">
-            <h2 id="contact">Contact</h2>
-            <p>{profile.contactLine}</p>
-            <ul>
-                <li>
-                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                </li>
-                <li>
-                    <a href={profile.linkedin}>LinkedIn</a>
-                </li>
-                <li>
-                    <a href={profile.github}>GitHub</a>
-                </li>
+            <section class="contact" aria-labelledby="contact">
+                <h2 id="contact" class="label">
+                    Contact
+                </h2>
+                <p>{profile.contactLine}</p>
+                <ul class="contact-links">
+                    <li>
+                        <a href={`mailto:${profile.email}`}>
+                            <Icon name="mail" />
+                            <span>{profile.email}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href={profile.linkedin}>
+                            <Icon name="person" />
+                            <span>LinkedIn</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href={profile.github}>
+                            <Icon name="code" />
+                            <span>GitHub</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href={resumeHref} download>
+                            <Icon name="download" />
+                            <span>Resume (PDF)</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="block" aria-labelledby="ai-first">
+            <h2 id="ai-first" class="wall">
+                {aiFirst.heading}
+            </h2>
+            <div class="ai-statement">
+                <aiFirst.Statement />
+            </div>
+            <ul class="ai-points">
+                {aiFirst.points.map((point) => (
+                    <li class="ai-point">
+                        <Icon name={point.icon} />
+                        <h3>{point.title}</h3>
+                        <p>{point.text}</p>
+                    </li>
+                ))}
             </ul>
         </section>
 
-        <section aria-labelledby="projects">
-            <h2 id="projects">Projects</h2>
-            {selectedProjects.map((project) => (
-                <article>
-                    <h3>{project.name}</h3>
-                    <p>
-                        {project.client} · {project.agency ? `via ${project.agency}` : 'Freelance'}{' '}
-                        · {project.year}
-                    </p>
-                    <p>{project.stack.join(', ')}</p>
-                    <project.Description />
-                    {project.url && <a href={project.url}>Visit website</a>}
-                </article>
-            ))}
-            <ul>
+        <section class="block" aria-labelledby="projects">
+            <h2 id="projects" class="wall">
+                Projects
+            </h2>
+            <ol class="works">
+                {selectedProjects.map((project) => (
+                    <li class="work">
+                        <p class="work-year">{project.year}</p>
+                        <div class="work-title">
+                            <h3>{project.name}</h3>
+                            <p class="work-client">{project.client}</p>
+                            <p class="work-agency">
+                                <Icon name="via" />
+                                {project.agency ? (
+                                    <span>
+                                        <span class="visually-hidden">via </span>
+                                        {project.agency}
+                                    </span>
+                                ) : (
+                                    <span>Freelance</span>
+                                )}
+                            </p>
+                        </div>
+                        <div class="work-body">
+                            <project.Description />
+                            <p class="work-stack">
+                                <Icon name="layers" />
+                                <span>
+                                    <span class="visually-hidden">Stack: </span>
+                                    {project.stack.join(', ')}
+                                </span>
+                            </p>
+                            {project.url && (
+                                <a class="work-link" href={project.url}>
+                                    Visit website
+                                    <Icon name="arrow-up-right" />
+                                </a>
+                            )}
+                        </div>
+                    </li>
+                ))}
+            </ol>
+
+            <h3 class="label more-title">More Projects</h3>
+            <ul class="more">
                 {otherProjects.map((project) => (
                     <li>
-                        {project.url ? <a href={project.url}>{project.name}</a> : project.name} ·{' '}
-                        {project.client} · {project.year}
+                        <span class="more-year">{project.year}</span>
+                        <span class="more-name">
+                            {project.url ? (
+                                <a href={project.url}>
+                                    {project.name}
+                                    <Icon name="arrow-up-right" />
+                                </a>
+                            ) : (
+                                project.name
+                            )}
+                        </span>
+                        <span class="more-client">{project.client}</span>
                     </li>
                 ))}
             </ul>
         </section>
 
-        <section aria-labelledby="experience">
-            <h2 id="experience">Experience</h2>
-            <ul>
+        <section class="block" aria-labelledby="experience">
+            <h2 id="experience" class="wall">
+                Experience
+            </h2>
+            <ol class="roles">
                 {experience.map((group) => (
-                    <li>
-                        <strong>{group.company ?? 'Freelance'}</strong> · {group.titles.join(' → ')}{' '}
-                        · {formatMonth(group.start)} – {group.end ? formatMonth(group.end) : 'now'}
+                    <li class="role">
+                        <p class="role-dates">
+                            {formatMonth(group.start)} –{' '}
+                            {group.end ? formatMonth(group.end) : <strong>now</strong>}
+                        </p>
+                        <h3>{group.company ?? 'Freelance'}</h3>
+                        <ol class="progression">
+                            {group.titles.map((title, index) => (
+                                <li>
+                                    {index > 0 && <Icon name="arrow-right" />}
+                                    {title}
+                                </li>
+                            ))}
+                        </ol>
                     </li>
                 ))}
-            </ul>
+            </ol>
         </section>
 
-        <section aria-labelledby="skills">
-            <h2 id="skills">Skills</h2>
-            {skills.map((group) => (
-                <>
-                    <h3>{group.name}</h3>
-                    <p>{group.items.join(', ')}</p>
-                </>
-            ))}
+        <section class="block" aria-labelledby="skills">
+            <h2 id="skills" class="wall">
+                Skills
+            </h2>
+            <div class="skills">
+                {skills.map((group) => (
+                    <div class="skill-group">
+                        <h3 class="label">{group.name}</h3>
+                        <ul>
+                            {group.items.map((item) => (
+                                <li>
+                                    <SkillLogo name={item} />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>© {profile.name}</p>
+    <footer class="footer">
+        <p class="sign-off">
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        </p>
+        <div class="footer-row">
+            <p>
+                © {new Date().getFullYear()} {profile.name}
+            </p>
+            <a href="#top">
+                Back to top <Icon name="arrow-up" />
+            </a>
+        </div>
     </footer>
 </Base>
+
+<style>
+    /* Masthead */
+
+    .masthead {
+        padding-top: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    /* Two balanced rows of three on phones, one row once it fits */
+    nav ul {
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        gap: 0.25rem 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--ink);
+        font-size: 0.9375rem;
+        font-weight: 600;
+    }
+
+    @media (min-width: 34rem) {
+        nav ul {
+            grid-template-columns: repeat(6, max-content);
+        }
+    }
+
+    nav a {
+        text-decoration: none;
+    }
+
+    h1 {
+        margin-top: clamp(3rem, 12vw, 9rem);
+        font-size: clamp(3.5rem, 14vw, 13rem);
+        font-weight: 850;
+        line-height: 0.88;
+        letter-spacing: -0.045em;
+        text-wrap: balance;
+    }
+
+    .headline,
+    .location {
+        font-size: clamp(1.375rem, 3.2vw, 2.75rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+    }
+
+    .headline {
+        margin-top: clamp(1rem, 2.5vw, 2rem);
+        font-weight: 600;
+    }
+
+    .location {
+        display: flex;
+        align-items: center;
+        gap: 0.3em;
+        font-weight: 300;
+    }
+
+    .location :global(.icon) {
+        width: 0.75em;
+        height: 0.75em;
+        stroke-width: 1.5;
+    }
+
+    /* Labels: small headings that sit on a 2px rule */
+
+    .label {
+        padding-top: 0.75rem;
+        border-top: 2px solid var(--ink);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    /* About and Contact */
+
+    .intro {
+        display: grid;
+        gap: clamp(2.5rem, 5vw, 4rem) var(--gap);
+        margin-top: clamp(3.5rem, 9vw, 7.5rem);
+    }
+
+    .intro .label {
+        margin-bottom: 1rem;
+    }
+
+    .about :global(p) {
+        max-width: 34ch;
+        font-size: clamp(1.25rem, 1.6vw + 0.6rem, 1.875rem);
+        line-height: 1.35;
+        letter-spacing: -0.012em;
+    }
+
+    .contact > p {
+        max-width: 32ch;
+    }
+
+    .contact-links {
+        display: grid;
+        justify-items: start;
+        gap: 0.35rem;
+        margin-top: 1.25rem;
+        font-size: clamp(1.25rem, 1.4vw + 0.7rem, 1.75rem);
+        font-weight: 650;
+        letter-spacing: -0.015em;
+    }
+
+    .contact-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45em;
+        overflow-wrap: anywhere;
+    }
+
+    .contact-links :global(.icon) {
+        width: 0.8em;
+        height: 0.8em;
+    }
+
+    @media (min-width: 56rem) {
+        .intro {
+            grid-template-columns: 7fr 5fr;
+        }
+    }
+
+    /* Sections hang from a 6px rule */
+
+    .block {
+        margin-top: clamp(5rem, 12vw, 10rem);
+    }
+
+    .wall {
+        padding-top: 0.5rem;
+        border-top: 6px solid var(--ink);
+        font-size: clamp(2.75rem, 8.5vw, 7.5rem);
+        font-weight: 850;
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+    }
+
+    /* AI-first: a statement at near-display size, then four points */
+
+    .ai-statement :global(p) {
+        max-width: 26ch;
+        margin-top: clamp(1.5rem, 4vw, 3rem);
+        font-size: clamp(1.625rem, 3.2vw + 0.5rem, 3.5rem);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+    }
+
+    /* Points are rows on the Projects grid: icon where the year sits, then title, then text */
+
+    .ai-points {
+        margin-top: clamp(2.5rem, 6vw, 4.5rem);
+    }
+
+    .ai-point {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 0.5rem 0.6rem;
+        padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+        border-top: 1px solid var(--ink);
+    }
+
+    .ai-point :global(.icon) {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .ai-point h3 {
+        font-size: clamp(1.375rem, 2.2vw, 2rem);
+        font-weight: 750;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+    }
+
+    .ai-point p {
+        grid-column: 1 / -1;
+        max-width: 60ch;
+    }
+
+    @media (min-width: 56rem) {
+        .ai-point {
+            grid-template-columns: 2fr 5fr 5fr;
+            align-items: baseline;
+            gap: 0.75rem var(--gap);
+        }
+
+        .ai-point :global(.icon) {
+            align-self: start;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .ai-point p {
+            grid-column: auto;
+        }
+    }
+
+    /* Projects */
+
+    .works {
+        margin-top: clamp(2rem, 5vw, 4rem);
+    }
+
+    .work {
+        display: grid;
+        gap: 0.75rem var(--gap);
+        padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+        border-top: 1px solid var(--ink);
+    }
+
+    .work-year {
+        font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .work h3 {
+        font-size: clamp(1.75rem, 3.4vw, 3rem);
+        font-weight: 750;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+    }
+
+    .work-client {
+        margin-top: 0.75rem;
+        font-weight: 600;
+    }
+
+    .work-agency,
+    .work-stack {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5em;
+    }
+
+    .work-agency {
+        font-weight: 300;
+    }
+
+    /* Centred on the first line of text, which is 1.5em tall */
+    .work-agency :global(.icon),
+    .work-stack :global(.icon) {
+        width: 1em;
+        height: 1em;
+        margin-top: 0.25em;
+    }
+
+    .work-body :global(ul) {
+        display: grid;
+        gap: 0.5rem;
+        max-width: 60ch;
+    }
+
+    .work-stack {
+        margin-top: 1rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+    }
+
+    .work-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        margin-top: 1.25rem;
+        font-weight: 650;
+    }
+
+    @media (min-width: 56rem) {
+        .work {
+            grid-template-columns: 2fr 5fr 5fr;
+        }
+    }
+
+    .more-title {
+        margin-top: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .more {
+        margin-top: 1rem;
+    }
+
+    .more li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 var(--gap);
+        padding: 0.7rem 0;
+        border-bottom: 1px solid var(--ink);
+    }
+
+    .more-name {
+        font-weight: 650;
+    }
+
+    .more-name a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+    }
+
+    .more-name :global(.icon) {
+        width: 0.75em;
+        height: 0.75em;
+    }
+
+    .more-client {
+        font-weight: 300;
+    }
+
+    .more-year {
+        grid-column: 2;
+        font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 55.99rem) {
+        .more-name {
+            grid-row: 1;
+        }
+    }
+
+    @media (min-width: 56rem) {
+        .more li {
+            grid-template-columns: 2fr 5fr 5fr;
+        }
+
+        .more-year {
+            grid-column: auto;
+        }
+    }
+
+    /* Experience: rows on the Projects grid, dates where the year sits */
+
+    .roles {
+        margin-top: clamp(2rem, 5vw, 4rem);
+    }
+
+    .role {
+        display: grid;
+        gap: 0.35rem var(--gap);
+        padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+        border-top: 1px solid var(--ink);
+    }
+
+    .role-dates {
+        font-weight: 300;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .role-dates strong {
+        font-weight: 700;
+    }
+
+    .role h3 {
+        font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+        font-weight: 750;
+        line-height: 1.05;
+        letter-spacing: -0.025em;
+    }
+
+    .progression {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 0.5rem;
+    }
+
+    .progression li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @media (min-width: 56rem) {
+        .role {
+            grid-template-columns: 2fr 5fr 5fr;
+            align-items: baseline;
+        }
+    }
+
+    /* Skills */
+
+    .skills {
+        display: grid;
+        gap: 2rem var(--gap);
+        margin-top: clamp(2rem, 5vw, 4rem);
+    }
+
+    .skill-group ul {
+        display: grid;
+        gap: 0.3rem;
+        margin-top: 0.75rem;
+        font-size: clamp(1.125rem, 1vw + 0.8rem, 1.5rem);
+        font-weight: 500;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+    }
+
+    .skill-group li {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .skill-group :global(.logo) {
+        flex: none;
+        width: 0.85em;
+        height: 0.85em;
+    }
+
+    @media (min-width: 40rem) {
+        .skills {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .skills {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    /* Footer: the page ends at the email address */
+
+    .footer {
+        margin-top: clamp(6rem, 14vw, 12rem);
+        padding: 1rem 0 clamp(1.5rem, 3vw, 2.5rem);
+        border-top: 6px solid var(--ink);
+    }
+
+    .sign-off {
+        font-size: clamp(1.75rem, 6.2vw, 6rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        overflow-wrap: anywhere;
+    }
+
+    .sign-off a {
+        text-decoration-thickness: 0.06em;
+        text-underline-offset: 0.12em;
+    }
+
+    .footer-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem 2rem;
+        margin-top: clamp(2rem, 5vw, 4rem);
+        font-size: 0.9375rem;
+    }
+
+    .footer-row a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        font-weight: 600;
+    }
+</style>

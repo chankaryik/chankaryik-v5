@@ -1,0 +1,53 @@
+---
+// A skill's own logo from Simple Icons (CC0), drawn in the text colour. Skills with no
+// published logo get an empty slot of the same size, so the names stay aligned.
+import * as icons from 'simple-icons'
+
+interface Props {
+    name: string
+}
+
+const slugs: Record<string, string> = {
+    Vue: 'Vuedotjs',
+    Nuxt: 'Nuxt',
+    React: 'React',
+    'Next.js': 'Nextdotjs',
+    TypeScript: 'Typescript',
+    'Tailwind CSS': 'Tailwindcss',
+    Sass: 'Sass',
+    Pinia: 'Pinia',
+    Figma: 'Figma',
+    Laravel: 'Laravel',
+    'Inertia.js': 'Inertia',
+    PHP: 'Php',
+    'C#/.NET': 'Dotnet',
+    Umbraco: 'Umbraco',
+    WordPress: 'Wordpress',
+    Strapi: 'Strapi',
+    Stripe: 'Stripe',
+    Vercel: 'Vercel',
+    DigitalOcean: 'Digitalocean',
+    'GitHub Actions': 'Githubactions',
+    'Claude Code': 'Claude',
+}
+
+const { name } = Astro.props
+const slug = slugs[name]
+const icon = slug ? (icons as Record<string, { path: string } | undefined>)[`si${slug}`] : undefined
+---
+
+{icon ? (
+    <svg
+        class="logo"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        aria-hidden="true"
+        focusable="false"
+        fill="currentColor"
+    >
+        <path d={icon.path} />
+    </svg>
+) : (
+    <span class="logo" aria-hidden="true" />
+)}

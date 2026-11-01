@@ -12,8 +12,9 @@ All content lives in `src/content/`:
 
 - `projects/`: one Markdown file per Project. `selected: true` shows it in full on the home page; `agency: null` means Freelance; the optional `order` sets the position among Projects from the same year.
 - `roles.yaml`: work history. `company: null` means Freelance; `end: null` means current.
-- `skills.yaml`: skill groups. `order` sets the display position.
+- `skills.yaml`: skill groups. `order` sets the display position. A skill shows its logo when Simple Icons has one; map new names in `src/components/SkillLogo.astro`.
 - `about.md`: name, Headline, contact details, and the About paragraph
+- `ai.md`: the AI-first section. The body is the opening statement; each point picks one of the site's line icons.
 
 The build checks every field, so a missing or misspelled field fails the build instead of going live.
 

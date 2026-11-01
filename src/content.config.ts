@@ -20,6 +20,24 @@ const about = defineCollection({
     }),
 })
 
+// How Chan Kar Yik works with AI. The body is the opening statement.
+const ai = defineCollection({
+    loader: glob({ pattern: 'ai.md', base: './src/content' }),
+    schema: z.object({
+        heading: z.string(),
+        points: z
+            .array(
+                z.object({
+                    title: z.string(),
+                    // One of the site's own line icons, see src/components/Icon.astro
+                    icon: z.enum(['code', 'chat', 'loop', 'arrow-right']),
+                    text: z.string(),
+                }),
+            )
+            .min(1),
+    }),
+})
+
 const projects = defineCollection({
     loader: glob({ pattern: '*.md', base: './src/content/projects' }),
     schema: z.object({
@@ -59,4 +77,4 @@ const skills = defineCollection({
     }),
 })
 
-export const collections = { about, projects, roles, skills }
+export const collections = { about, ai, projects, roles, skills }

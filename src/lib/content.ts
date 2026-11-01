@@ -19,6 +19,14 @@ export async function getProfile() {
     return { ...entry.data, About: Content }
 }
 
+/** The AI-first section: heading, points and the opening statement. */
+export async function getAiFirst() {
+    const entry = await getEntry('ai', 'ai')
+    if (!entry) throw new Error('src/content/ai.md is missing')
+    const { Content } = await render(entry)
+    return { ...entry.data, Statement: Content }
+}
+
 /** Every Project, newest first, with its rendered description. */
 export async function getProjects() {
     const entries = await getCollection('projects')

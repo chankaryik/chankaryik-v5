@@ -1,0 +1,115 @@
+/*
+ * Two colours only: off-black ink on off-white paper. No greys, no hue (brief, "Look and feel").
+ * Nothing moves: every state change is instant.
+ */
+
+:root {
+    --paper: #f2f2f2;
+    --ink: #1a1a1a;
+    --margin: clamp(1rem, 4.5vw, 4rem);
+    --gap: clamp(1rem, 2.5vw, 2rem);
+    --font: var(--font-archivo), 'Archivo Fallback', Arial, sans-serif;
+    color-scheme: light;
+}
+
+/*
+ * Shown on a first visit when the font misses its short block period. Arial Regular and
+ * Arial Bold each cover half the weight axis, so headings keep their weight. The metric
+ * overrides are the ones Astro computes for Arial against Archivo, so the page lays out the
+ * same. (Astro's own fallback maps every weight to Arial Regular, which flattens headings.)
+ */
+@font-face {
+    font-family: 'Archivo Fallback';
+    src: local('Arial'), local('ArialMT');
+    font-weight: 100 549;
+    size-adjust: 102.29%;
+    ascent-override: 85.84%;
+    descent-override: 20.53%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Archivo Fallback';
+    src: local('Arial Bold'), local('Arial-BoldMT');
+    font-weight: 550 900;
+    size-adjust: 102.29%;
+    ascent-override: 85.84%;
+    descent-override: 20.53%;
+    line-gap-override: 0%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-color: var(--ink) var(--paper);
+}
+
+body {
+    margin: 0;
+    padding: 0 var(--margin);
+    font-size: clamp(1.0625rem, 0.35vw + 1rem, 1.1875rem);
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+::selection {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.2em;
+}
+
+/* Every link fills with ink on hover: the page's one interaction, and it never animates */
+a:hover {
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
+.icon {
+    flex: none;
+    width: 0.9em;
+    height: 0.9em;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
