@@ -1,0 +1,105 @@
+---
+import { getProfile } from '../lib/content'
+import BrandLogo from './BrandLogo.astro'
+import Icon from './Icon.astro'
+
+const profile = await getProfile()
+---
+
+<footer class="footer">
+    <p class="sign-off">
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+    </p>
+    <ul class="footer-links">
+        <li>
+            <a href={profile.linkedin}>
+                <BrandLogo name="LinkedIn" />
+                <span>LinkedIn</span>
+            </a>
+        </li>
+        <li>
+            <a href={profile.github}>
+                <BrandLogo name="GitHub" />
+                <span>GitHub</span>
+            </a>
+        </li>
+    </ul>
+    <div class="footer-row">
+        <p>
+            © {new Date().getFullYear()} {profile.name}
+        </p>
+        <a href="#top">
+            Back to top <Icon name="arrow-up" />
+        </a>
+    </div>
+</footer>
+
+<style>
+    /* Footer: every page ends at the email address, with LinkedIn and GitHub beneath it */
+
+    .footer {
+        margin-top: clamp(6rem, 14vw, 12rem);
+        padding: 1rem 0 clamp(1.5rem, 3vw, 2.5rem);
+        border-top: 6px solid var(--ink);
+    }
+
+    .sign-off {
+        font-size: clamp(1.75rem, 6.2vw, 6rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        overflow-wrap: anywhere;
+    }
+
+    .sign-off a {
+        text-decoration-thickness: 0.06em;
+        text-underline-offset: 0.12em;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 1.5em;
+        margin-top: clamp(1.25rem, 3vw, 2rem);
+        font-size: clamp(1.25rem, 1.4vw + 0.7rem, 1.75rem);
+        font-weight: 650;
+        letter-spacing: -0.015em;
+    }
+
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45em;
+        overflow-wrap: anywhere;
+    }
+
+    /* Full text size on phones, where the text is at its smallest */
+    .footer-links :global(.logo) {
+        flex: none;
+        width: 1em;
+        height: 1em;
+    }
+
+    @media (min-width: 40rem) {
+        .footer-links :global(.logo) {
+            width: 0.8em;
+            height: 0.8em;
+        }
+    }
+
+    .footer-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem 2rem;
+        margin-top: clamp(2rem, 5vw, 4rem);
+        font-size: 0.9375rem;
+    }
+
+    .footer-row a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        font-weight: 600;
+    }
+</style>

@@ -24,27 +24,31 @@ The site is its own proof: a frontend developer's portfolio that sends no JavaSc
 
 Opened from a link in a message, a LinkedIn profile or a Resume, on a phone or a desktop, often between other tasks. Read once, quickly. A Resume PDF printed from the same page is on the backlog.
 
+A Post is the exception: a reader arrives from a shared link, often on a phone, or through RSS, and stays for several minutes. It must read comfortably for that long, show whose site it is, and offer a way into the portfolio.
+
 ## Capabilities and Constraints
 
-- One page (`/`) with sections in a fixed order: Name and Headline, About, Contact, AI-first, Projects, Experience, Skills, the Rust aside, footer. Plus a plain "page not found" page.
+- The home page (`/`) with sections in a fixed order: Name and Headline, About, Contact, AI-first, Projects, Experience, Skills, Blog, the Rust aside, footer. Blog shows only once there are published Posts.
+- The blog: `/blog/` lists every Post, `/blog/<post-name>/` is one Post, and `/blog/rss.xml` is the feed. Plus a plain "page not found" page.
 - Hard rules from [ADR 0001](docs/adr/0001-zero-client-javascript.md): 0 bytes of client-side JavaScript, no image files on the page, at most 100 KB first load, Lighthouse mobile 100 in all four categories, no layout shift, no third-party requests.
 - Light theme only: off-black on off-white, never `#000` or `#fff`, black, white and greys only. No hue anywhere, including links, focus and selection.
 - Nothing moves: no transitions, animations, smooth scrolling or scroll effects. Hover and focus change instantly.
-- One self-hosted Google Fonts family, one variable woff2, Latin only, upright only, preloaded, `font-display: optional`.
+- One self-hosted Google Fonts family, Latin only, `font-display: optional`: the upright variable woff2, preloaded, and since the blog an italic one for emphasis in Posts, never preloaded. Code in Posts uses the reader's system monospace.
 - No emoji. Brand logos appear only beside skills and the LinkedIn and GitHub links. The site's own logo, the Smiley, leads the nav. Every icon, logo or not, is monochrome inline SVG.
 - Latest two versions of Chrome, Edge, Safari and Firefox, from a 360px phone to a wide desktop.
-- Terms come from [GLOSSARY.md](GLOSSARY.md): Headline, Project, Selected Project, Client, Agency, Freelance, Role, Resume, Smiley.
+- Terms come from [GLOSSARY.md](GLOSSARY.md): Headline, Project, Selected Project, Client, Agency, Freelance, Role, Resume, Smiley, Post, Featured Post, Draft.
 
 ## Brand Commitments
 
 - Name: Chan Kar Yik. Headline: "Frontend Developer, est. 2018". It never names an employer, a seniority level or Vue.
 - Voice: plain, first person, short sentences (see `src/content/about.md`).
-- The copy in `src/content/` is final and approved.
+- The copy in `src/content/` is final and approved, except the three placeholder Posts in `src/content/blog/`, which are Drafts written only to check the layout. Never write Posts and present them as Chan Kar Yik's own writing.
 
 ## Evidence on Hand
 
 - 15 Projects in `src/content/projects/`, seven of them Selected, with Client, Agency or Freelance, stack, year and two outcome lines.
 - Roles in `src/content/roles.yaml`, skills in `src/content/skills.yaml`, profile and About in `src/content/about.md`, the AI-first section in `src/content/ai.md`, the Rust aside in `src/content/rust.md`.
+- No real Posts yet: `src/content/blog/` holds three placeholder Drafts.
 - No screenshots, photos, testimonials or metrics, and none may be invented or shown.
 
 ## Product Principles

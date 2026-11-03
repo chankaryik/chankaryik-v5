@@ -92,4 +92,21 @@ const skills = defineCollection({
     }),
 })
 
-export const collections = { about, ai, projects, roles, rust, skills }
+// One Markdown file per Post; the file name is its address, /blog/<file-name>/
+const blog = defineCollection({
+    loader: glob({ pattern: '*.md', base: './src/content/blog' }),
+    schema: z.object({
+        title: z.string(),
+        // The standfirst under the title, the meta description and the summary in lists and RSS
+        description: z.string(),
+        // Written YYYY-MM-DD
+        date: z.coerce.date(),
+        updated: z.coerce.date().optional(),
+        // Shown in the Blog section on the home page
+        featured: z.boolean().default(false),
+        // Shown in `astro dev` only, never in a production build
+        draft: z.boolean().default(false),
+    }),
+})
+
+export const collections = { about, ai, blog, projects, roles, rust, skills }

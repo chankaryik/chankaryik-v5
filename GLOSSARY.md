@@ -26,6 +26,14 @@ _Avoid_: CV, résumé
 A single piece of writing published on the blog.
 _Avoid_: article, entry
 
+**Featured Post**:
+A Post Chan Kar Yik has chosen to show in the Blog section on the home page. Every Post is on the blog page either way.
+_Avoid_: pinned post, highlight, selected post
+
+**Draft**:
+A Post that is not ready to publish. It shows while Chan Kar Yik works on the site and never reaches the live site.
+_Avoid_: unpublished post, hidden post
+
 ### Work
 
 **Project**:

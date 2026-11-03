@@ -1,0 +1,76 @@
+---
+import Icon from '../../components/Icon.astro'
+import PostRows from '../../components/PostRows.astro'
+import SiteFooter from '../../components/SiteFooter.astro'
+import SiteNav from '../../components/SiteNav.astro'
+import Base from '../../layouts/Base.astro'
+import { blogDescription, getPosts } from '../../lib/blog'
+import { getProfile } from '../../lib/content'
+
+const posts = await getPosts()
+const profile = await getProfile()
+---
+
+<Base
+    title={`Blog — ${profile.name}`}
+    description={blogDescription(profile)}
+    noindex={posts.length === 0}
+>
+    <SiteNav blogCurrent="page" />
+
+    <header class="page-head" id="top">
+        <h1>Blog</h1>
+        {posts.length > 0 && (
+            <p class="feed">
+                <a href="/blog/rss.xml">
+                    <Icon name="rss" />
+                    RSS feed
+                </a>
+            </p>
+        )}
+    </header>
+
+    <main>
+        {posts.length > 0 ? (
+            <PostRows posts={posts} level={2} />
+        ) : (
+            <p class="empty">No Posts yet.</p>
+        )}
+    </main>
+
+    <SiteFooter />
+</Base>
+
+<style>
+    /* The page title hangs from a 6px rule, as on the 404 page */
+    h1 {
+        margin-top: clamp(3rem, 12vw, 9rem);
+        padding-top: 0.5rem;
+        border-top: 6px solid var(--ink);
+        font-size: clamp(3rem, 11vw, 9.5rem);
+        font-weight: 850;
+        line-height: 0.9;
+        letter-spacing: -0.045em;
+    }
+
+    .feed {
+        margin-top: clamp(1rem, 2.5vw, 2rem);
+        font-size: 0.9375rem;
+        font-weight: 600;
+    }
+
+    .feed a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+    }
+
+    main {
+        margin-top: clamp(2.5rem, 6vw, 5rem);
+    }
+
+    .empty {
+        padding-top: clamp(1.25rem, 2.5vw, 2rem);
+        border-top: 1px solid var(--ink);
+    }
+</style>

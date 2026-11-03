@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T14:30:00Z",
+  "generatedAt": "2026-11-02T14:59:42Z",
   "title": "Design System: Chan Kar Yik",
   "extensions": {
     "colorMeta": {
@@ -70,9 +70,34 @@
         "displayName": "Masthead Subhead",
         "purpose": "Headline line (600) and city (300) under the name."
       },
-      "body": { "displayName": "Body", "purpose": "Descriptions and point text, max 60ch." },
-      "label": { "displayName": "Label", "purpose": "Small headings on a 2px rule." },
-      "small": { "displayName": "Small", "purpose": "Nav, stack lines, footer row." }
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descriptions and point text, max 60ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Small headings on a 2px rule."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Nav, stack lines, footer row."
+      },
+      "post-title": {
+        "displayName": "Post Title",
+        "purpose": "A Post's title on its 6px wall rule; smaller than a wall heading because titles run long."
+      },
+      "post-heading": {
+        "displayName": "Post Heading",
+        "purpose": "Part headings inside a Post, each on a 2px rule."
+      },
+      "reading": {
+        "displayName": "Reading",
+        "purpose": "The text of a Post, a size up from Body, line-height 1.6, max 66ch."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code in Posts, in the reader's system monospace; keywords bold, comments italic, all ink."
+      }
     },
     "shadows": [],
     "motion": [],
@@ -97,8 +122,12 @@
       "value": "outline: 3px solid #1A1A1A; outline-offset: 3px",
       "purpose": "All links, via :focus-visible."
     },
-    "selection": { "value": "background: #1A1A1A; color: #F2F2F2" },
-    "scrollbar": { "value": "scrollbar-color: #1A1A1A #F2F2F2" },
+    "selection": {
+      "value": "background: #1A1A1A; color: #F2F2F2"
+    },
+    "scrollbar": {
+      "value": "scrollbar-color: #1A1A1A #F2F2F2"
+    },
     "icons": {
       "grid": "20px",
       "stroke": "2px",
@@ -117,9 +146,18 @@
       "source": "src/components/Smiley.astro"
     },
     "breakpoints": [
-      { "name": "skills-2", "value": "40rem" },
-      { "name": "grid", "value": "56rem" },
-      { "name": "skills-4", "value": "64rem" }
+      {
+        "name": "skills-2",
+        "value": "40rem"
+      },
+      {
+        "name": "grid",
+        "value": "56rem"
+      },
+      {
+        "name": "skills-4",
+        "value": "64rem"
+      }
     ]
   },
   "components": [
@@ -186,14 +224,30 @@
       "description": "The footer's closing email address on a 6px wall rule, with a thinner, closer underline at its size.",
       "html": "<footer class=\"ds-footer\"><p class=\"ds-sign-off\"><a href=\"#\">chankaryik8@gmail.com</a></p></footer>",
       "css": ".ds-footer { padding-top: 1rem; border-top: 6px solid var(--ink, #1A1A1A); color: var(--ink, #1A1A1A); font-family: var(--font, Archivo, Arial, sans-serif); } .ds-sign-off { margin: 0; font-size: clamp(1.75rem, 6.2vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -0.04em; overflow-wrap: anywhere; } .ds-sign-off a { color: inherit; text-decoration-line: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.12em; } .ds-sign-off a:hover { background: var(--ink, #1A1A1A); color: var(--paper, #F2F2F2); text-decoration: none; } .ds-sign-off a:focus-visible { outline: 3px solid var(--ink, #1A1A1A); outline-offset: 3px; }"
+    },
+    {
+      "name": "Post Row",
+      "kind": "custom",
+      "refersTo": "post-row",
+      "description": "A Post in a list: date and reading time, the title as an underlined link, the description; on the 2fr 5fr 5fr grid from 56rem.",
+      "html": "<article class=\"ds-post\"><p class=\"ds-post-when\"><time>2 Nov 2026</time> <span>6 min read</span></p><h3 class=\"ds-post-title\"><a href=\"#\">A Post title set at Role Title size</a></h3><p class=\"ds-post-text\">The description, as Body text, at most 60 characters wide.</p></article>",
+      "css": ".ds-post { display: grid; grid-template-columns: 2fr 5fr 5fr; align-items: baseline; gap: 0.6rem 2rem; padding: 2rem 0; border-top: 1px solid var(--ink, #1a1a1a); color: var(--ink, #1a1a1a); font-family: Archivo, 'Archivo Fallback', Arial, sans-serif; } .ds-post p, .ds-post h3 { margin: 0; } .ds-post-when { display: flex; flex-direction: column; font-variant-numeric: tabular-nums; } .ds-post-when time { font-weight: 700; } .ds-post-when span { font-weight: 300; } .ds-post-title { font-size: 2.25rem; font-weight: 750; line-height: 1.25; letter-spacing: -0.025em; } .ds-post-title a { color: inherit; text-decoration-thickness: 0.09em; text-underline-offset: 0.2em; } .ds-post-title a:hover { background: var(--ink, #1a1a1a); color: var(--paper, #f2f2f2); text-decoration: none; } .ds-post-title a:focus-visible { outline: 3px solid var(--ink, #1a1a1a); outline-offset: 3px; } .ds-post-text { max-width: 60ch; font-size: 1.1875rem; line-height: 1.5; }"
+    },
+    {
+      "name": "Code Listing",
+      "kind": "custom",
+      "refersTo": "code-listing",
+      "description": "Code in a Post: a 2px rule, the language as a label, the code in the system monospace with bold keywords and italic comments, and a closing 1px rule.",
+      "html": "<figure class=\"ds-code\"><figcaption>CSS</figcaption><pre tabindex=\"0\"><code><span class=\"c\">/* Every link fills with ink on hover */</span>\na:hover {\n    background: var(--ink);\n}</code></pre></figure>",
+      "css": ".ds-code { margin: 0; color: var(--ink, #1a1a1a); } .ds-code figcaption { padding-top: 0.75rem; border-top: 2px solid var(--ink, #1a1a1a); font-family: Archivo, 'Archivo Fallback', Arial, sans-serif; font-size: 1rem; font-weight: 700; line-height: 1.5; } .ds-code pre { margin: 0; padding: 0.5rem 0 1rem; overflow-x: auto; border-bottom: 1px solid var(--ink, #1a1a1a); font-family: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; font-size: 1rem; line-height: 1.6; scrollbar-width: thin; scrollbar-color: var(--ink, #1a1a1a) var(--paper, #f2f2f2); } .ds-code .c { font-style: italic; } .ds-code pre:focus-visible { outline: 3px solid var(--ink, #1a1a1a); outline-offset: 3px; }"
     }
   ],
   "narrative": {
     "northStar": "The Gallery Wall",
-    "overview": "The page is set like a modern museum identity: the name as monumental wall lettering, and every section hung from a heavy ink rule on one fixed column grid. There is one colour of ink on one colour of paper, one type family, and nothing moves. Hierarchy is carried entirely by weight, size and rule thickness, never by colour, tint, shadow or container.\n\nDensity is generous at the top (display type, long vertical gaps between sections) and tight inside sections (rows divided by hairline rules, tabular years in a narrow first column). The page reads top to bottom as a single column of walls; there are no cards, chips, panels or images.",
+    "overview": "The page is set like a modern museum identity: the name as monumental wall lettering, and every section hung from a heavy ink rule on one fixed column grid. There is one colour of ink on one colour of paper, one type family, and nothing moves. Hierarchy is carried entirely by weight, size and rule thickness, never by colour, tint, shadow or container.\n\nDensity is generous at the top (display type, long vertical gaps between sections) and tight inside sections (rows divided by hairline rules, tabular years in a narrow first column). The page reads top to bottom as a single column of walls; there are no cards, chips, panels or images.\n\nThe blog carries the same wall into reading. A Post's title hangs from the 6px rule like a section of the home page, and its text runs as one calm column from the grid's second column, with the date where a Project's year would sit. The frame is the gallery; the column is quiet.",
     "keyCharacteristics": [
       "Two colours: off-black ink on off-white paper, no greys, no hue.",
-      "One variable family, Archivo, used from weight 300 to 850.",
+      "One variable family, Archivo, used from weight 300 to 850, with its italic only for emphasis in Posts.",
       "A three-weight rule system (6px, 2px, 1px) is the only structure.",
       "Rows share one 2fr 5fr 5fr grid from 56rem.",
       "Links invert to solid ink on hover, instantly.",
@@ -212,7 +266,12 @@
       },
       {
         "name": "The Weight Carries It Rule",
-        "body": "Every level of hierarchy is size plus weight inside one family. Bold dates and years (700) mark time; light (300) marks secondary metadata. No second family, and no italics (only the upright axis is shipped).",
+        "body": "Every level of hierarchy is size plus weight inside one family. Bold dates and years (700) mark time; light (300) marks secondary metadata. No second web font. Italic exists only for emphasis inside a Post, never for hierarchy, labels or decoration.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Column Rule",
+        "body": "Inside a Post the world stays in the frame: the title, rules, labels and the way code and tables are set. The reading column itself is plain Reading text at 66 characters, never wider, with nothing set behind it. Only code listings and tables may run wider, across both text columns.",
         "section": "typography"
       },
       {
@@ -247,15 +306,18 @@
       "Do open sections with a 6px rule, labels with a 2px rule, and divide rows with a 1px rule.",
       "Do put row lists on the 2fr 5fr 5fr grid from 56rem.",
       "Do underline links and invert them to ink on hover, instantly; focus with a 3px ink outline at 3px offset.",
-      "Do draw icons inline on the 20px grid with a 2px stroke in currentColor, next to text that carries the meaning."
+      "Do draw icons inline on the 20px grid with a 2px stroke in currentColor, next to text that carries the meaning.",
+      "Do keep a Post's text in one column of Reading type, at most 66 characters, starting in the grid's second column from 56rem; only code listings and tables run wider.",
+      "Do mark code with weight and slant only: keywords bold, comments italic, all in ink."
     ],
     "donts": [
       "Don't use #000, #fff, greys, opacity tints or any hue.",
       "Don't add transitions, animations or scroll effects; every state change is instant.",
       "Don't use shadows, rounded corners, cards, chips or tinted panels. The Smiley's circle is the one round form.",
       "Don't use the Smiley as decoration; it leads the nav and the 404 home link, and nothing else.",
-      "Don't add a second font family or italics; one self-hosted upright Archivo is the whole type system.",
-      "Don't use image files or icon fonts; icons and logos are inline SVG.",
+      "Don't add a second web font; self-hosted Archivo is the whole type system. Its italic is for emphasis inside Posts only, and code uses the reader's own monospace.",
+      "Don't use image files or icon fonts; icons and logos are inline SVG. A Post with an image fails the build.",
+      "Don't give code, quotes or tables a background, a box, an indent or a coloured bar; hang them from rules, or mark them by weight.",
       "Don't add client-side JavaScript for any visual behaviour."
     ]
   }

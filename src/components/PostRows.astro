@@ -1,0 +1,77 @@
+---
+import { formatDate, isoDay, type Post } from '../lib/blog'
+
+interface Props {
+    posts: Post[]
+    /** The heading level of each Post's title: 3 under the home page's Blog heading, 2 on the blog page. */
+    level: 2 | 3
+}
+
+const { posts, level } = Astro.props
+const Title = `h${level}` as const
+---
+
+<ol class="posts">
+    {posts.map((post) => (
+        <li class="post">
+            <p class="post-when">
+                <time datetime={isoDay(post.date)}>{formatDate(post.date)}</time>
+                <span>{post.minutes} min read</span>
+            </p>
+            <Title class="post-title">
+                <a href={post.url}>{post.title}</a>
+            </Title>
+            <p class="post-description">{post.description}</p>
+        </li>
+    ))}
+</ol>
+
+<style>
+    /* Posts are rows on the Projects grid: the date where the year sits, then title, then summary */
+
+    .post {
+        display: grid;
+        gap: 0.6rem var(--gap);
+        padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+        border-top: 1px solid var(--ink);
+    }
+
+    .post-when {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 0.75em;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .post-when time {
+        font-weight: 700;
+    }
+
+    .post-when span {
+        font-weight: 300;
+    }
+
+    /* Loose enough that each line's underline clears the ascenders of the line below */
+    .post-title {
+        font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+        font-weight: 750;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+    }
+
+    .post-description {
+        max-width: 60ch;
+    }
+
+    @media (min-width: 56rem) {
+        .post {
+            grid-template-columns: 2fr 5fr 5fr;
+            align-items: baseline;
+        }
+
+        .post-when {
+            flex-direction: column;
+        }
+    }
+</style>

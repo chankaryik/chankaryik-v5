@@ -9,6 +9,8 @@
     --margin: clamp(1rem, 4.5vw, 4rem);
     --gap: clamp(1rem, 2.5vw, 2rem);
     --font: var(--font-archivo), 'Archivo Fallback', Arial, sans-serif;
+    /* Code in Posts only: the reader's own monospace, so it costs no download */
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
     color-scheme: light;
 }
 
@@ -32,6 +34,29 @@
     font-family: 'Archivo Fallback';
     src: local('Arial Bold'), local('Arial-BoldMT');
     font-weight: 550 900;
+    size-adjust: 102.29%;
+    ascent-override: 85.84%;
+    descent-override: 20.53%;
+    line-gap-override: 0%;
+}
+
+/* The same split for emphasis in Posts, whose italic file is never preloaded */
+@font-face {
+    font-family: 'Archivo Fallback';
+    src: local('Arial Italic'), local('Arial-ItalicMT');
+    font-weight: 100 549;
+    font-style: italic;
+    size-adjust: 102.29%;
+    ascent-override: 85.84%;
+    descent-override: 20.53%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Archivo Fallback';
+    src: local('Arial Bold Italic'), local('Arial-BoldItalicMT');
+    font-weight: 550 900;
+    font-style: italic;
     size-adjust: 102.29%;
     ascent-override: 85.84%;
     descent-override: 20.53%;
@@ -97,6 +122,24 @@ a:hover {
 a:focus-visible {
     outline: 3px solid var(--ink);
     outline-offset: 3px;
+}
+
+/* Sections hang from a 6px rule, labels from a 2px rule */
+
+.wall {
+    padding-top: 0.5rem;
+    border-top: 6px solid var(--ink);
+    font-size: clamp(2.75rem, 8.5vw, 7.5rem);
+    font-weight: 850;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+}
+
+.label {
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--ink);
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 .icon {

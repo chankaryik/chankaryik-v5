@@ -1,0 +1,160 @@
+---
+import { getPosts } from '../lib/blog'
+import { getAiFirst } from '../lib/content'
+import Smiley from './Smiley.astro'
+
+interface Props {
+    /** On the home page the links jump within the page and the Smiley goes back to the top. */
+    home?: boolean
+    /** Marks the Blog link: `page` on the blog page itself, `true` on a Post. */
+    blogCurrent?: 'page' | 'true'
+}
+
+const { home = false, blogCurrent } = Astro.props
+const aiFirst = await getAiFirst()
+const hasPosts = (await getPosts()).length > 0
+const base = home ? '' : '/'
+const sections = [
+    { label: 'About', href: `${base}#about` },
+    { label: 'Contact', href: `${base}#contact` },
+    { label: aiFirst.heading, href: `${base}#ai-first` },
+    { label: 'Projects', href: `${base}#projects` },
+    { label: 'Experience', href: `${base}#experience` },
+    { label: 'Skills', href: `${base}#skills` },
+    ...(hasPosts ? [{ label: 'Blog', href: home ? '#blog' : '/blog/', current: blogCurrent }] : []),
+]
+---
+
+<nav class="sections" aria-label="Sections">
+    {home ? (
+        <a class="home round" href="#top">
+            <Smiley />
+            <span class="visually-hidden">Chan Kar Yik, back to top</span>
+        </a>
+    ) : (
+        <a class="home named" href="/">
+            <Smiley />
+            Chan Kar Yik
+        </a>
+    )}
+    <ul>
+        {sections.map(({ label, href, current }) => (
+            <li>
+                <a href={href} aria-current={current}>
+                    {label}
+                </a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<style>
+    /*
+     * Section nav: one row that stays at the top of the screen, led by the smiley. Its paper runs
+     * edge to edge so the page scrolls out of sight beneath it; its 2px rule keeps to the margins
+     * like every other rule. Where the links do not fit (most phones), they scroll sideways
+     * between the smiley and the right screen edge, and the word cut off there shows there is
+     * more.
+     */
+    .sections {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        column-gap: 0.625rem;
+        margin-inline: calc(-1 * var(--margin));
+        padding-inline: var(--margin);
+        background: var(--paper);
+    }
+
+    .sections::after {
+        content: '';
+        grid-column: 1 / -1;
+        border-bottom: 2px solid var(--ink);
+    }
+
+    /*
+     * The smiley: the site's logo and the way back to the top. It stays put while the links
+     * scroll. On the home page its hover fill is round, the shape of the face. Its tap area is
+     * the full bar height, from the screen edge to halfway to the first link (the bar is its
+     * containing block).
+     */
+    .round {
+        border-radius: 50%;
+    }
+
+    /* The ring stays ink and merges with the round fill, so the face turns into one solid disc. A
+       paper ring would leave a grey hairline where its edge meets the fill's. */
+    .round:hover :global(.ring) {
+        stroke: var(--ink);
+    }
+
+    .round::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: calc(var(--margin) + 2.125rem);
+    }
+
+    /* On other pages the smiley comes with the name, as on the 404 page, and leads home. The
+       tap area again runs from the screen edge, over the full bar height. */
+    .named {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .named::after {
+        content: '';
+        position: absolute;
+        inset: -0.75rem -0.625rem -0.75rem calc(-1 * var(--margin));
+    }
+
+    .sections ul {
+        display: flex;
+        gap: 1.25rem;
+        margin-right: calc(-1 * var(--margin));
+        padding-inline: 0.625rem var(--margin);
+        overflow-x: auto;
+        scrollbar-width: none;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .sections li {
+        position: relative;
+        padding-block: 0.75rem;
+    }
+
+    .sections a {
+        text-decoration: none;
+    }
+
+    /* Where the reader is: the Blog link on the blog and its Posts keeps its underline */
+    .sections a[aria-current] {
+        text-decoration-line: underline;
+    }
+
+    .sections a[aria-current]:hover {
+        text-decoration: none;
+    }
+
+    /* The whole bar height and half of each gap are the tap area; the hover fill stays on the word */
+    .sections li a::after {
+        content: '';
+        position: absolute;
+        inset: 0 -0.625rem;
+    }
+
+    /* Section links land below the bar, not under it */
+    :global(html) {
+        scroll-padding-top: 5rem;
+    }
+</style>

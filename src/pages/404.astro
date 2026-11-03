@@ -2,6 +2,10 @@
 import Icon from '../components/Icon.astro'
 import Smiley from '../components/Smiley.astro'
 import Base from '../layouts/Base.astro'
+import { getPosts } from '../lib/blog'
+
+// A mistyped Post address lands here too, so the blog gets a way back once it has Posts
+const hasPosts = (await getPosts()).length > 0
 ---
 
 <Base title="Page not found — Chan Kar Yik" description="This page does not exist." noindex>
@@ -13,11 +17,20 @@ import Base from '../layouts/Base.astro'
     </header>
     <main>
         <h1>Page not found</h1>
-        <p class="back">
-            <a href="/">
-                <Icon name="arrow-right" /> Go to the home page
-            </a>
-        </p>
+        <ul class="back">
+            <li>
+                <a href="/">
+                    <Icon name="arrow-right" /> Go to the home page
+                </a>
+            </li>
+            {hasPosts && (
+                <li>
+                    <a href="/blog/">
+                        <Icon name="arrow-right" /> Go to the blog
+                    </a>
+                </li>
+            )}
+        </ul>
     </main>
 </Base>
 
@@ -54,6 +67,9 @@ import Base from '../layouts/Base.astro'
     }
 
     .back {
+        display: grid;
+        justify-items: start;
+        gap: 0.35rem;
         margin-top: clamp(2rem, 5vw, 3.5rem);
         font-size: clamp(1.25rem, 1.4vw + 0.7rem, 1.75rem);
         font-weight: 650;

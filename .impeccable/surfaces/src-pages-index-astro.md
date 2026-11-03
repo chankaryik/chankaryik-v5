@@ -19,7 +19,7 @@ THESIS: A modern museum-identity calling card: the name set as monumental wall l
 
 OWN-WORLD: Two colours only, off-black #1A1A1A on off-white #F2F2F2, no greys and no hue. One family, Archivo, 300 to 850: weight and size carry every level of hierarchy. 6px rules open major sections, 2px rules open labels, 1px rules divide rows. Monochrome 2px-stroke inline icons. Links are underlined (navigation excepted), hover fills them with solid ink instantly, and keyboard focus draws a 3px ink outline.
 
-STORY: The visitor reads the name, Headline and city, then About and four ways to make contact within the first screens; the AI-first statement and points (added at the user's request), Projects, Experience and Skills follow as wall sections, their rows on one 2fr 5fr 5fr grid; the page closes on the email address.
+STORY: The visitor reads the name, Headline and city, then About and four ways to make contact within the first screens; the AI-first statement and points (added at the user's request), Projects, Experience and Skills follow as wall sections, their rows on one 2fr 5fr 5fr grid; the Blog section (added with the blog, shown once there are published Posts) sets the Featured Posts as rows on the same grid; the page closes on the email address.
 
 FIRST VIEWPORT: The section nav sits on a 2px rule at the top. The name runs flush left at up to 13rem (14vw), weight 850, tracking -0.045em. Below it the Headline (weight 600) and the city (weight 300, pin icon). On desktop, About (7 of 12 columns) and Contact (5 columns) begin at the fold, each contact link led by an icon. Signature interaction: instant ink inversion on every link. Motion grammar: none, by the brief's hard rule.
 

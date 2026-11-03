@@ -1,0 +1,432 @@
+---
+import Icon from '../../components/Icon.astro'
+import SiteFooter from '../../components/SiteFooter.astro'
+import SiteNav from '../../components/SiteNav.astro'
+import Base from '../../layouts/Base.astro'
+import { formatDate, getPosts, isoDay, postHtml, type Post } from '../../lib/blog'
+import { getProfile } from '../../lib/content'
+
+export async function getStaticPaths() {
+    const posts = await getPosts()
+    return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }))
+}
+
+interface Props {
+    post: Post
+    posts: Post[]
+}
+
+const { post, posts } = Astro.props
+const profile = await getProfile()
+// The newest other Posts, to read next
+const morePosts = posts.filter((other) => other.id !== post.id).slice(0, 3)
+const url = new URL(post.url, Astro.site).href
+// Structured data for search engines. Browsers never run this script type, so ADR 0001 allows it.
+const blogPosting = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date.toISOString(),
+    dateModified: (post.updated ?? post.date).toISOString(),
+    url,
+    mainEntityOfPage: url,
+    image: new URL('/share.png', Astro.site).href,
+    inLanguage: 'en',
+    author: { '@type': 'Person', name: profile.name, url: new URL('/', Astro.site).href },
+}
+---
+
+<Base
+    title={`${post.title} — ${profile.name}`}
+    description={post.description}
+    article={{ published: post.date, modified: post.updated }}
+>
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPosting)} />
+    <SiteNav blogCurrent="true" />
+
+    <main>
+        <article>
+            <header id="top">
+                <h1>{post.title}</h1>
+                <p class="standfirst">{post.description}</p>
+            </header>
+
+            <div class="post-body">
+                <p class="post-meta">
+                    <time datetime={isoDay(post.date)}>{formatDate(post.date)}</time>
+                    <span>{post.minutes} min read</span>
+                    {post.updated && (
+                        <span>
+                            Updated{' '}
+                            <time datetime={isoDay(post.updated)}>{formatDate(post.updated)}</time>
+                        </span>
+                    )}
+                </p>
+                <div class="prose" set:html={postHtml(post)} />
+            </div>
+        </article>
+
+        <nav class="next" aria-labelledby="more-posts">
+            <h2 id="more-posts" class="label">
+                More Posts
+            </h2>
+            {morePosts.length > 0 && (
+                <ul class="more">
+                    {morePosts.map((other) => (
+                        <li>
+                            <a href={other.url}>{other.title}</a>
+                            <time datetime={isoDay(other.date)}>{formatDate(other.date)}</time>
+                        </li>
+                    ))}
+                </ul>
+            )}
+            <p class="all-posts">
+                <a href="/blog/">
+                    All Posts <Icon name="arrow-right" />
+                </a>
+            </p>
+        </nav>
+    </main>
+
+    <SiteFooter />
+</Base>
+
+<style>
+    /* The title hangs from a 6px rule, like a section of the home page */
+
+    h1 {
+        margin-top: clamp(2.5rem, 8vw, 6rem);
+        padding-top: 0.5rem;
+        border-top: 6px solid var(--ink);
+        font-size: clamp(2.25rem, 6vw, 6rem);
+        font-weight: 850;
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+        text-wrap: balance;
+    }
+
+    .standfirst {
+        max-width: 34ch;
+        margin-top: clamp(1.25rem, 3vw, 2.5rem);
+        font-size: clamp(1.25rem, 1.6vw + 0.6rem, 1.875rem);
+        line-height: 1.35;
+        letter-spacing: -0.012em;
+        text-wrap: pretty;
+    }
+
+    /* A row on the home page's grid: date and reading time where the year sits, text from the
+       second column */
+
+    /* minmax(0, …) keeps a long code line scrolling inside its listing, not widening the page */
+    .post-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem var(--gap);
+        margin-top: clamp(2.5rem, 6vw, 4.5rem);
+        padding-top: clamp(1.25rem, 2.5vw, 2rem);
+        border-top: 1px solid var(--ink);
+    }
+
+    .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 0.75em;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .post-meta > time {
+        font-weight: 700;
+    }
+
+    .post-meta > span {
+        font-weight: 300;
+    }
+
+    @media (min-width: 56rem) {
+        .post-body {
+            grid-template-columns: 2fr minmax(0, 5fr) minmax(0, 5fr);
+            align-items: start;
+        }
+
+        .post-meta {
+            flex-direction: column;
+        }
+
+        .prose {
+            grid-column: 2 / -1;
+        }
+    }
+
+    /*
+     * The reading column: Archivo a size up from the home page's body. Text keeps to a measure of
+     * about 66 characters; code listings and tables may use the full width of both columns.
+     * Spacing is tight inside a part and generous above each heading. Every rule below has the
+     * same weight, so the later one wins.
+     */
+
+    .prose {
+        --reading: clamp(1.125rem, 0.4vw + 1rem, 1.25rem);
+        /* 66 characters of Reading text, as a length that holds for headings at other sizes */
+        --measure: calc(var(--reading) * 37.8);
+        font-size: var(--reading);
+        line-height: 1.6;
+        overflow-wrap: break-word;
+    }
+
+    .prose > :global(:where(:not(figure, pre, .table))) {
+        max-width: var(--measure);
+    }
+
+    .prose > :global(*) {
+        margin-block: 0;
+    }
+
+    .prose > :global(* + *) {
+        margin-top: 1.25em;
+    }
+
+    .prose > :global(:where(figure, pre, blockquote, .table, hr)),
+    .prose > :global(:where(figure, pre, blockquote, .table, hr) + *) {
+        margin-top: 2em;
+    }
+
+    .prose > :global(:where(h2, h3) + *) {
+        margin-top: 0.75rem;
+    }
+
+    .prose > :global(:where(h2)) {
+        margin-top: clamp(2.75rem, 5vw, 4rem);
+    }
+
+    .prose > :global(:where(h3)) {
+        margin-top: 2.25rem;
+    }
+
+    .prose > :global(:first-child) {
+        margin-top: 0;
+    }
+
+    /* Headings: a part opens on a 2px rule, as labels do; smaller headings keep only the weight */
+
+    .prose :global(h2) {
+        padding-top: 0.75rem;
+        border-top: 2px solid var(--ink);
+        font-size: clamp(1.5rem, 1.6vw + 0.9rem, 2.25rem);
+        font-weight: 750;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+    }
+
+    .prose :global(h3) {
+        font-size: clamp(1.25rem, 0.8vw + 0.95rem, 1.5rem);
+        font-weight: 750;
+        line-height: 1.2;
+        letter-spacing: -0.015em;
+        text-wrap: balance;
+    }
+
+    .prose :global(h4) {
+        font-size: 1em;
+        font-weight: 750;
+    }
+
+    .prose :global(strong) {
+        font-weight: 700;
+    }
+
+    /* Lists: square markers, like every corner on the site; numbers in tabular figures */
+
+    .prose :global(:is(ul, ol)) {
+        padding-left: 1.25em;
+    }
+
+    .prose :global(ul) {
+        list-style: square;
+    }
+
+    .prose :global(ol) {
+        list-style: decimal;
+    }
+
+    .prose :global(li::marker) {
+        font-variant-numeric: tabular-nums;
+    }
+
+    .prose :global(ol > li::marker) {
+        font-weight: 700;
+    }
+
+    .prose :global(li + li),
+    .prose :global(li > :is(ul, ol, p + p)) {
+        margin-top: 0.4em;
+    }
+
+    /* A quote is someone else's voice: a size up and light, as the Rust aside's confession is,
+       flush with the column and with no box or bar */
+
+    .prose :global(blockquote) {
+        margin-inline: 0;
+        font-size: clamp(1.25rem, 0.9vw + 0.95rem, 1.625rem);
+        font-weight: 300;
+        line-height: 1.35;
+        letter-spacing: -0.012em;
+    }
+
+    .prose :global(blockquote > * + *) {
+        margin-top: 0.75em;
+    }
+
+    /* Starts at the column's edge like every other rule; the browser would centre it */
+    .prose :global(hr) {
+        height: 0;
+        margin-inline: 0;
+        border: 0;
+        border-top: 1px solid var(--ink);
+    }
+
+    /*
+     * Code: the reader's own monospace. A listing hangs from a 2px rule with its language as the
+     * label, and closes on a 1px rule; one with no language has no label and opens on a 1px rule.
+     * Long lines scroll sideways inside it.
+     */
+
+    .prose :global(code) {
+        font-family: var(--mono);
+        font-size: 0.875em;
+    }
+
+    .prose :global(figure) {
+        margin-inline: 0;
+    }
+
+    .prose :global(figcaption) {
+        padding-top: 0.75rem;
+        border-top: 2px solid var(--ink);
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .prose :global(pre) {
+        padding-block: 1rem;
+        overflow-x: auto;
+        border-top: 1px solid var(--ink);
+        border-bottom: 1px solid var(--ink);
+        font-size: 0.875em;
+        line-height: 1.6;
+        tab-size: 4;
+        scrollbar-width: thin;
+    }
+
+    .prose :global(figure pre) {
+        margin: 0;
+        padding-top: 0.5rem;
+        border-top: 0;
+    }
+
+    .prose :global(pre code) {
+        font-size: 1em;
+    }
+
+    .prose :global(:is(pre, .table):focus-visible) {
+        outline: 3px solid var(--ink);
+        outline-offset: 3px;
+    }
+
+    /* Tables: the header row sits on a 2px rule, like a label, and 1px rules divide the rows. Each
+       column keeps a readable width, so a table wider than the screen scrolls sideways inside its
+       region instead of breaking its cells into fragments. */
+
+    .prose :global(.table) {
+        overflow-x: auto;
+        scrollbar-width: thin;
+    }
+
+    .prose :global(table) {
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 2px solid var(--ink);
+        font-size: 0.9375em;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .prose :global(:is(th, td)) {
+        min-width: 8rem;
+        padding: 0.6rem 1rem 0.6rem 0;
+        border-bottom: 1px solid var(--ink);
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .prose :global(th) {
+        font-weight: 700;
+    }
+
+    /* More Posts: rows like More Projects, then the way to all of them */
+
+    .next {
+        margin-top: clamp(4rem, 9vw, 7.5rem);
+    }
+
+    .more {
+        margin-top: 1rem;
+    }
+
+    .more li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 var(--gap);
+        padding: 0.7rem 0;
+        border-bottom: 1px solid var(--ink);
+    }
+
+    .more a {
+        justify-self: start;
+        font-weight: 650;
+    }
+
+    .more time {
+        font-weight: 300;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+    }
+
+    .all-posts {
+        margin-top: clamp(1.5rem, 3vw, 2.5rem);
+        font-size: clamp(1.25rem, 1.4vw + 0.7rem, 1.75rem);
+        font-weight: 650;
+        letter-spacing: -0.015em;
+    }
+
+    .all-posts a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45em;
+    }
+
+    .all-posts :global(.icon) {
+        width: 0.8em;
+        height: 0.8em;
+    }
+
+    @media (min-width: 56rem) {
+        .more li,
+        .all-posts {
+            display: grid;
+            grid-template-columns: 2fr 5fr 5fr;
+            column-gap: var(--gap);
+        }
+
+        .more a,
+        .all-posts a {
+            grid-column: 2 / -1;
+            justify-self: start;
+        }
+
+        .more time {
+            grid-area: 1 / 1;
+        }
+    }
+</style>
