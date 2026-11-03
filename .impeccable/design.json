@@ -84,7 +84,7 @@
       },
       "post-title": {
         "displayName": "Post Title",
-        "purpose": "A Post's title on its 6px wall rule; smaller than a wall heading because titles run long."
+        "purpose": "A Post's title, with no rule above it; smaller than a wall heading because titles run long."
       },
       "post-heading": {
         "displayName": "Post Heading",
@@ -244,7 +244,7 @@
   ],
   "narrative": {
     "northStar": "The Gallery Wall",
-    "overview": "The page is set like a modern museum identity: the name as monumental wall lettering, and every section hung from a heavy ink rule on one fixed column grid. There is one colour of ink on one colour of paper, one type family, and nothing moves. Hierarchy is carried entirely by weight, size and rule thickness, never by colour, tint, shadow or container.\n\nDensity is generous at the top (display type, long vertical gaps between sections) and tight inside sections (rows divided by hairline rules, tabular years in a narrow first column). The page reads top to bottom as a single column of walls; there are no cards, chips, panels or images.\n\nThe blog carries the same wall into reading. A Post's title hangs from the 6px rule like a section of the home page, and its text runs as one calm column from the grid's second column, with the date where a Project's year would sit. The frame is the gallery; the column is quiet.",
+    "overview": "The page is set like a modern museum identity: the name as monumental wall lettering, and every section hung from a heavy ink rule on one fixed column grid. There is one colour of ink on one colour of paper, one type family, and nothing moves. Hierarchy is carried entirely by weight, size and rule thickness, never by colour, tint, shadow or container.\n\nDensity is generous at the top (display type, long vertical gaps between sections) and tight inside sections (rows divided by hairline rules, tabular years in a narrow first column). The page reads top to bottom as a single column of walls; there are no cards, chips, panels or images.\n\nThe blog carries the same wall into reading. A Post's title stands free under the nav, with no rule above it, and its text runs as one calm column from the grid's second column, with the date where a Project's year would sit. The frame is the gallery; the column is quiet.",
     "keyCharacteristics": [
       "Two colours: off-black ink on off-white paper, no greys, no hue.",
       "One variable family, Archivo, used from weight 300 to 850, with its italic only for emphasis in Posts.",

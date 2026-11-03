@@ -182,7 +182,7 @@ The page is set like a modern museum identity: the name as monumental wall lette
 
 Density is generous at the top (display type, long vertical gaps between sections) and tight inside sections (rows divided by hairline rules, tabular years in a narrow first column). The page reads top to bottom as a single column of walls; there are no cards, chips, panels or images.
 
-The blog carries the same wall into reading. A Post's title hangs from the 6px rule like a section of the home page, and its text runs as one calm column from the grid's second column, with the date where a Project's year would sit. The frame is the gallery; the column is quiet.
+The blog carries the same wall into reading. A Post's title stands free under the nav, with no rule above it, and its text runs as one calm column from the grid's second column, with the date where a Project's year would sit. The frame is the gallery; the column is quiet.
 
 **Key Characteristics:**
 
@@ -235,7 +235,7 @@ Archivo is self-hosted through Astro's fonts API: variable woff2 files, axis 100
 - **Small** (600, 0.9375rem): nav, stack lines, footer row.
 - **Meta** (300): client names in More Projects, agency lines, date ranges, the city.
 - **Sign-off** (800, clamp 1.75rem to 6rem, line-height 1, -0.04em): the closing email address.
-- **Post title** (850, clamp 2.25rem to 6rem, line-height 0.95, -0.045em, balanced): a Post's title on its 6px rule. Smaller than a wall heading because titles run to several words. The blog page's "Blog" uses the 404 heading's Page Title treatment.
+- **Post title** (850, clamp 2.25rem to 6rem, line-height 0.95, -0.045em, balanced): a Post's title, with no rule above it. Smaller than a wall heading because titles run to several words. The blog page's "Blog" uses the 404 heading's Page Title treatment, without its rule.
 - **Standfirst** (the Lead treatment: 400, clamp 1.25rem to 1.875rem, max 34ch): a Post's description under its title.
 - **Reading** (400, clamp 1.125rem to 1.25rem, line-height 1.6, max 66ch): the text of a Post, a size up from Body because it is read for minutes, not seconds.
 - **Post heading** (750, clamp 1.5rem to 2.25rem, line-height 1.1, -0.025em) on a 2px rule; smaller headings inside a Post (750, clamp 1.25rem to 1.5rem) drop the rule.
@@ -277,7 +277,7 @@ Completely flat. No shadows, no layering, no background panels. Structure and gr
 
 Square corners everywhere, down to the square list markers in Posts. The one round form is the Smiley, a circle by nature, and its hover fill follows it. Otherwise the only drawn forms are horizontal ink rules in three weights, each with one job:
 
-- **Wall rule** (6px): opens every major section and the footer, and tops the 404 heading, the blog page's heading and a Post's title.
+- **Wall rule** (6px): opens every major section and the footer, and tops the 404 heading. The blog page's heading and a Post's title have none.
 - **Label rule** (2px): opens small labels (About, Contact, More Projects, More Posts, skill group names), underlines the nav, and inside a Post opens each part heading, each labelled code listing and each table's header row. It always has a label or heading on it.
 - **Row rule** (1px): divides rows inside a section (top border on rows, bottom border on More Projects and More Posts entries); inside a Post it closes code listings, opens a listing with no language, divides table rows and draws a thematic break.
 
@@ -341,7 +341,7 @@ A Post in a list (`src/components/PostRows.astro`), on the home page's Blog sect
 
 ### Post page
 
-- **Head:** the Post title on a 6px wall rule, then the standfirst.
+- **Head:** the Post title with no rule above it, then the standfirst.
 - **Body:** a 1px rule, the date and reading time, then the reading column. Part headings hang from a 2px rule with more space above than below; smaller headings keep only their weight.
 - **Lists:** square markers; ordered lists number in tabular figures at 700.
 - **Quotes:** someone else's voice, marked by weight as the Rust aside's confession is: light (300) at a size between Reading and Lead, flush with the column, with no indent, box or bar.

@@ -15,13 +15,13 @@ Peers, recruiters and Prospects who followed a link to one Post, often from Link
 
 ## Direction contract
 
-THESIS: The Gallery Identity carried into reading: the Post title hangs from a 6px wall rule like a section of the home page, and the text below is one calm column on the site's 2fr 5fr 5fr grid. It refuses the blog default of a centred column under a hero image with cards of related Posts.
+THESIS: The Gallery Identity carried into reading: the Post title stands free under the nav, with no rule above it, and the text below is one calm column on the site's 2fr 5fr 5fr grid. It refuses the blog default of a centred column under a hero image with cards of related Posts.
 
 OWN-WORLD: The incumbent world unchanged: ink #1A1A1A on paper #F2F2F2, Archivo 300 to 850, rules of 6px, 2px and 1px, instant ink inversion on links. Additions: Archivo italic for emphasis inside Posts, and a system monospace for code, whose syntax is marked by weight and slant, never colour.
 
 STORY: The reader sees the title, the standfirst and the date, reads the Post, and ends on More Posts and the email sign-off. The list page is the Posts as rows, newest first.
 
-FIRST VIEWPORT: The sticky nav with the Smiley and the name. The title at up to 6rem, weight 850, on a 6px rule. The standfirst at lede size. From 56rem, date and reading time sit in the first column and the text starts in the second, about 66 characters wide. Signature interaction: the ink inversion. Motion grammar: none, by the brief's hard rule.
+FIRST VIEWPORT: The sticky nav with the Smiley and the name. The title at up to 6rem, weight 850, with no rule above it. The standfirst at lede size. From 56rem, date and reading time sit in the first column and the text starts in the second, about 66 characters wide. Signature interaction: the ink inversion. Motion grammar: none, by the brief's hard rule.
 
 FORM: Extension of the home page's Gallery Identity, inherited from the home surface brief (src-pages-index-astro.md, seed:c7e5a5228b77dee8). Chan Kar Yik asked to follow the current design, so this surface had no roll of its own.
 
